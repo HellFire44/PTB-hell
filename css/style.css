@@ -1,0 +1,132 @@
+body {
+  list-style: none; /* Retire tout les style des listes qui seront dans le body*/
+  margin: 0;
+  padding: 0;
+}
+
+
+.logoptb{
+	width: 10%;
+	padding-left: 20px;
+}
+.titre-ptb {
+  padding: 60px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 30px;
+}
+.menu {
+    display: flex;              /* Transformation en flexbox */
+    padding:0;                  /* Suppression des marges internes */
+    background-color: #ccc;     /* Ajout de la couleur d'arrière-plan */
+}
+.menu li {
+    list-style-type: none ;       /* Suppression des puces */
+}
+.menu a {
+    display:block;                /* Transformation en block */
+    min-width: 120px;             /* Largeur minimale des liens */
+}
+.menu a {
+    display:block;                /* Transformation en block */
+    min-width: 120px;             /* Largeur minimale des liens */   
+    
+    margin: 0.5rem;               /* Marges externes (1 valeurs = 4 directions) */
+    padding: 0.4rem 0;            /* Marges internes (2 valeurs = haut/bas et gauche/droite)*/
+    text-align: center;           /* Centrage du texte */   
+    background-color: #000;    /* Couleur d'arrière-plan */
+    color: #fff;                  /* Couleur du texte */
+    text-decoration: none;        /* Suppression du soulignement */
+    border: 1px solid #fff;       /* Ajout d'une bordure */
+    border-radius: 41px;           /* Arrondis des bordures */
+    transition: all 1s ;          /* Ajout des effets de transition */
+}
+.menu {
+    display: flex;              /* Transformation en flexbox */
+    padding:0;                  /* Suppression des marges internes */
+    background-color: #grey;     /* Ajout de la couleur d'arrière-plan */
+    justify-content: center     /* Alignements des liens dans le menu */
+}
+.menu a:hover {
+  background-color: orange;
+  color: whitesmoke;
+  border-color: orange;
+}
+/*div#content{*/
+	/*background-color: black;*/
+}
+/*div#content div
+{
+	display: inline-block;
+	width: 48%;
+}
+
+div#content div.leftbox
+{
+	background-color: yellow;
+	vertical-align: top;
+
+}
+div#content div h1, p; iframe{
+	margin: 35px;
+}
+div#content div.rightbox
+{
+	background-color: green;
+}
+div#content div.annonce{
+	background-color: black;
+}
+nav.menu-nav ul li.btn 
+{
+	list-style-type: none;
+	display: inline-block;
+
+}
+
+nav.menu-nav ul li.btn a 
+{
+	color: #fff;
+	background-color: red;
+	text-decoration: none;
+	padding: 10px;
+}
+nav.menu-nav ul li.btn:hover a 
+{
+	color: red;
+	background-color: white;
+	transition: 0.3s all;
+}
+
+header {
+	background-color: black;
+}
+footer {
+	background-color: red;
+}
+
+p.welcome
+{
+	color: #fff;
+	background-color: #E21C44; <!--Mettre un Backgroun sur le texte-->
+}
+p.today
+{
+	color:  #000;
+	font-weight: bold;
+}
+body
+{
+	background-color: #777;
+}
+h2.headline
+{
+	font-size: 50px;
+	padding-left: 200px;
+}
+a 
+{
+	color: #E21C44;
+	opacity: 0.7;
+*/
