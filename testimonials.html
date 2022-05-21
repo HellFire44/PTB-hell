@@ -21,7 +21,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Site CSS -->
-    <link rel="stylesheet" href="style.css">  
+    <link rel="stylesheet" href="style.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
@@ -99,9 +99,9 @@
                         <li><a href="services.html">Our Services</a></li>
                         <li><a href="portfolio.html">Portfolio</a></li>
                         <li><a href="features.html">Features</a></li>
-                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a class="active" href="testimonials.html">Testimonials</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
-						<li><a class="active" href="contact.html">Contact</a></li>
+						<li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -113,10 +113,10 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="banner">
-						<h2>Pricing</h2>
+						<h2>Testimonials</h2>
 						<ul class="page-title-link">
 							<li><a href="#">Home</a></li>
-							<li><a href="#">Pricing</a></li>
+							<li><a href="#">Testimonials</a></li>
 						</ul>
 					</div>
 				</div>
@@ -124,90 +124,128 @@
 		</div>
 	</div>
 
-    <div id="contact" class="section wb">
+    <div id="test-box" class="section wb">
         <div class="container">
             <div class="section-title text-center">
-                <h3>Get in touch</h3>
-                <p class="lead">Let us give you more details about the special offer website you want us. Please fill out the form below. <br>We have million of website owners who happy to work with us!</p>
+                <h3>Testimonials</h3>
+                <p class="lead">We thanks for all our awesome testimonials! There are hundreds of our happy customers! <br>Let's see what others say about GoodWEB Solutions website template!</p>
             </div><!-- end title -->
 
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="contact_form">
-                        <div id="message"></div>
-                        <form id="contactform" class="row" action="contact.php" name="contactform" method="post">
-                            <fieldset class="row-fluid">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="Your Email">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="Your Phone">
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label class="sr-only">Select Service</label>
-                                    <select name="select_service" id="select_service" class="selectpicker form-control" data-style="btn-white">
-                                        <option value="12">Installation Service</option>
-                                        <option value="Web Design">Web Design</option>
-                                        <option value="Web Development">Web Development</option>
-                                        <option value="Graphic Design">Graphic Design</option>
-                                        <option value="Others">Others</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label class="sr-only">What is max price?</label>
-                                    <select name="select_price" id="select_price" class="selectpicker form-control" data-style="btn-white">
-                                        <option value="$100 - $2000">$100 - $2000</option>
-                                        <option value="$2000 - $4000">$2000 - $4000</option>
-                                        <option value="$4000 - $10000">$4000 - $10000</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <textarea class="form-control" name="comments" id="comments" rows="6" placeholder="Give us more details.."></textarea>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
-                                    <button type="submit" value="SEND" id="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">Submit</button>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="testi-carousel owl-carousel owl-theme">
+                        <div class="testimonial clearfix">
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> Wonderful Support!</h3>
+                                <p class="lead">They have got my project on time with the competition with a sed highly skilled, and experienced & professional team.</p>
+                            </div>
+                            <div class="testi-meta">
+                                <img src="uploads/testi_01.png" alt="" class="img-responsive alignleft">
+                                <h4>James Fernando <small>- Manager of Racer</small></h4>
+                            </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        <!-- end testimonial -->
+
+                        <div class="testimonial clearfix">
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> Awesome Services!</h3>
+                                <p class="lead">Explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you completed.</p>
+                            </div>
+                            <div class="testi-meta">
+                                <img src="uploads/testi_02.png" alt="" class="img-responsive alignleft">
+                                <h4>Jacques Philips <small>- Designer</small></h4>
+                            </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        <!-- end testimonial -->
+
+                        <div class="testimonial clearfix">
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> Great & Talented Team!</h3>
+                                <p class="lead">The master-builder of human happines no one rejects, dislikes avoids pleasure itself, because it is very pursue pleasure. </p>
+                            </div>
+                            <div class="testi-meta">
+                                <img src="uploads/testi_03.png" alt="" class="img-responsive alignleft">
+                                <h4>Venanda Mercy <small>- Newyork City</small></h4>
+                            </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        <!-- end testimonial -->
+                        <div class="testimonial clearfix">
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> Wonderful Support!</h3>
+                                <p class="lead">They have got my project on time with the competition with a sed highly skilled, and experienced & professional team.</p>
+                            </div>
+                            <div class="testi-meta">
+                                <img src="uploads/testi_01.png" alt="" class="img-responsive alignleft">
+                                <h4>James Fernando <small>- Manager of Racer</small></h4>
+                            </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        <!-- end testimonial -->
+
+                        <div class="testimonial clearfix">
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> Awesome Services!</h3>
+                                <p class="lead">Explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you completed.</p>
+                            </div>
+                            <div class="testi-meta">
+                                <img src="uploads/testi_02.png" alt="" class="img-responsive alignleft">
+                                <h4>Jacques Philips <small>- Designer</small></h4>
+                            </div>
+                            <!-- end testi-meta -->
+                        </div>
+                        <!-- end testimonial -->
+
+                        <div class="testimonial clearfix">
+                            <div class="desc">
+                                <h3><i class="fa fa-quote-left"></i> Great & Talented Team!</h3>
+                                <p class="lead">The master-builder of human happines no one rejects, dislikes avoids pleasure itself, because it is very pursue pleasure. </p>
+                            </div>
+                            <div class="testi-meta">
+                                <img src="uploads/testi_03.png" alt="" class="img-responsive alignleft">
+                                <h4>Venanda Mercy <small>- Newyork City</small></h4>
+                            </div>
+                            <!-- end testi-meta -->
+                        </div><!-- end testimonial -->
+                    </div><!-- end carousel -->
                 </div><!-- end col -->
             </div><!-- end row -->
-			
-			<div class="row">
-				<div class="col-md-offset-1 col-sm-10 col-md-10 col-sm-offset-1 pd-add">
-					<div class="address-item">
-						<div class="address-icon">
-							<i class="icon icon-location2"></i>
-						</div>
-						<h3>Headquarters</h3>
-						<p>PO Box 16122 Collins Street West 
-							<br> Victoria 8007 Australia</p>
-					</div>
-					<div class="address-item">
-						<div class="address-icon">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</div>
-						<h3>Email Us</h3>
-						<p>info@yoursite.com
-							<br>info@yoursite.com</p>
-					</div>
-					<div class="address-item">
-						<div class="address-icon">
-							<i class="icon icon-headphones"></i>
-						</div>
-						<h3>Call Us</h3>
-						<p>+61 3 8376 6284
-							<br>+61 3 8376 6185</p>
-					</div>
-				</div>
-			</div><!-- end row -->
-			
+
+        </div><!-- end container -->
+    </div><!-- end section -->
+
+    <div id="testimonials" class="parallax section db parallax-off" style="background-image:url('uploads/parallax_03.jpg');">
+        <div class="container">
+            <div class="section-title text-center">
+                <h3>Our Clients</h3>
+                <p class="lead">We thanks for all our awesome testimonials! There are hundreds of our happy customers! <br>Let's see what others say about GoodWEB Solutions website template!</p>
+            </div><!-- end title -->
+
+            <hr class="hr1">
+
+            <div class="row logos">
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_01.png" alt="" class="img-repsonsive"></a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_02.png" alt="" class="img-repsonsive"></a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_03.png" alt="" class="img-repsonsive"></a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_04.png" alt="" class="img-repsonsive"></a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_05.png" alt="" class="img-repsonsive"></a>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-6 wow fadeInUp">
+                    <a href="#"><img src="uploads/logo_06.png" alt="" class="img-repsonsive"></a>
+                </div>
+            </div><!-- end row -->
+
         </div><!-- end container -->
     </div><!-- end section -->
 

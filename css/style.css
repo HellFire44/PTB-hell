@@ -1,96 +1,355 @@
-body {
-  list-style: none;
-  /* Retire tout les style des listes qui seront dans le body*/
-  margin: 0;
-  padding: 0;
-}
+  body {
+    list-style: none;
+    /* Retire tout les style des listes qui seront dans le body*/
+    margin: 0;
+    padding: 0;
+  }
+  .menu-header{
+       text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 30px;
+  }
+  .home-icon{
+    width: 5%;
+  }
+  
+  .actu-title{
+    display: flex;
+    align-content: center;
+    justify-content: center;
 
-.background-header {
-  padding: 60px;
-  text-align: center;
-  background: #1abc9c;
-  color: white;
-  font-size: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  flex-direction: row-reverse;
-}
+  }
 
-.logoptb {
-  width: 10%;
-  padding-left: 20px;
-}
+  .logo_ptb{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row-reverse;
 
-.titre-ptb {
-  padding: 60px;
-  text-align: center;
-  background: #1abc9c;
-  color: white;
-  font-size: 30px;
-}
+  }
+  .background-header {
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 30px;
+  }
 
-.menu {
-  display: flex;
-  /* Transformation en flexbox */
-  padding: 0;
-  /* Suppression des marges internes */
-  background-color: #ccc;
-  /* Ajout de la couleur d'arrière-plan */
-}
+  .logoptb {
+    width: 10%;
+    padding-left: 20px;
+  }
 
-.menu li {
-  list-style-type: none;
-  /* Suppression des puces */
-}
+  .titre-ptb {
+    padding: 60px;
+    color: white;
+    font-size: 30px;
+  }
 
-.menu a {
-  display: block;
-  /* Transformation en block */
-  min-width: 120px;
-  /* Largeur minimale des liens */
-}
+  .menu {
+    display: flex;
+    /* Transformation en flexbox */
+    padding: 0;
+    /* Suppression des marges internes */
+    background-color: #ccc;
+    /* Ajout de la couleur d'arrière-plan */
+  }
 
-.menu a {
-  display: block;
-  /* Transformation en block */
-  min-width: 120px;
-  /* Largeur minimale des liens */
+  .menu li {
+    list-style-type: none;
+    /* Suppression des puces */
+  }
 
-  margin: 0.5rem;
-  /* Marges externes (1 valeurs = 4 directions) */
-  padding: 0.4rem 0;
-  /* Marges internes (2 valeurs = haut/bas et gauche/droite)*/
-  text-align: center;
-  /* Centrage du texte */
-  background-color: #000;
-  /* Couleur d'arrière-plan */
-  color: #fff;
-  /* Couleur du texte */
-  text-decoration: none;
-  /* Suppression du soulignement */
-  border: 1px solid #fff;
-  /* Ajout d'une bordure */
-  border-radius: 41px;
-  /* Arrondis des bordures */
-  transition: all 1s;
-  /* Ajout des effets de transition */
-}
+  .menu a {
+    display: block;
+    /* Transformation en block */
+    min-width: 120px;
+    /* Largeur minimale des liens */
+  }
 
-.menu {
-  display: flex;
-  /* Transformation en flexbox */
-  padding: 0;
-  /* Suppression des marges internes */
-  background-color: grey;
-  /* Ajout de la couleur d'arrière-plan */
-  justify-content: center
-    /* Alignements des liens dans le menu */
-}
+  .menu a {
+    display: block;
+    /* Transformation en block */
+    min-width: 184px;
+    /* Largeur minimale des liens */
 
-.menu a:hover {
-  background-color: orange;
-  color: whitesmoke;
-  border-color: orange;
-}
+    margin: 3.5rem;
+    /* Marges externes (1 valeurs = 4 directions) */
+    padding: 0.4rem 0;
+    /* Marges internes (2 valeurs = haut/bas et gauche/droite)*/
+    text-align: center;
+    /* Centrage du texte */
+    /*background-color: #000;*/
+    /* Couleur d'arrière-plan */
+    color: #fff;
+    /* Couleur du texte */
+    text-decoration: none;
+    /* Suppression du soulignement */
+    /*border: 1px solid #fff;*/
+    /* Ajout d'une bordure */
+    /*border-radius: 15px;*/
+    /* Arrondis des bordures */
+    transition: all 0.3s;
+    /* Ajout des effets de transition */
+  }
+
+  .menu {
+    display: flex;
+    /* Transformation en flexbox */
+    padding: 0;
+    /* Suppression des marges internes */
+    background-color: #1abc9c;
+    /* Ajout de la couleur d'arrière-plan */
+    justify-content: center
+      /* Alignements des liens dans le menu */
+  }
+
+  .menu a:hover {
+    /*background-color: orange;*/
+    color: grey;
+    /*border-color: orange;*/
+  }
+
+  /*Essaie menu Deroulan*/
+  #slideshow {
+    position: relative;
+    width: 640px;
+    height: 310px;
+    padding: 15px;
+    margin: 0 auto 2em;
+    border: 1px solid #ddd;
+    background: #FFF;
+    /* CSS3 effects */
+    background: linear-gradient(#FFF, #FFF 20%, #EEE 80%, #DDD);
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 0 3px rgba(0,0,0, 0.2);
+  }
+   
+  /* avanced box-shadow
+   * tutorial @
+   * https://www.creativejuiz.fr/blog/les-tutoriels/ombre-avancees-avec-css3-et-box-shadow 
+  */
+  #slideshow:before,
+  #slideshow:after {
+    position: absolute;
+    bottom:16px;
+    z-index: -10;
+    width: 50%;
+    height: 20px;
+    content: " ";
+    background: rgba(0,0,0,0.1);
+    border-radius: 50%;
+    box-shadow: 0 0 3px rgba(0,0,0, 0.4), 0 20px 10px rgba(0,0,0, 0.7);
+  }
+  #slideshow:before {
+    left:0;
+    transform: rotate(-4deg);
+  }
+  #slideshow:after {
+    right:0;
+    transform: rotate(4deg);
+  }
+  /* gestion des dimensions et débordement du conteneur */
+  #slideshow .container {
+    position:relative;
+    width: 640px;
+    height: 310px;
+    overflow: hidden;
+  }
+    
+  /* on prévoit un petit espace gris pour la timeline */
+  #slideshow .container:after {
+    position:absolute;
+    bottom: 0; left:0;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background: #999;
+  }
+  /* 
+     le conteneur des slides
+     en largeur il fait 100% x le nombre de slides
+  */
+  #slideshow .slider {
+    position: absolute;
+    left:0; top:0;
+    width: 400%;
+    height: 310px;
+  }
+
+  /* annulation des marges sur figure */
+  #slideshow figure {
+    position:relative;
+    display:inline-block;
+    padding:0; margin:0;
+  }
+  /* petit effet de vignette sur les images */
+  #slideshow figure:after {
+    position: absolute;
+    display:block;
+    content: " ";
+    top:0; left:0;
+    width: 100%; height: 100%;
+    box-shadow: 0 0 65px rgba(0,0,0, 0.5) inset;
+  }
+  /* styles de nos légendes */
+  #slideshow figcaption {
+    position:absolute;
+    left:0; right:0; bottom: 5px;
+    padding: 20px;
+    margin:0;
+    border-top: 1px solid rgb(225,225,225);
+    text-align:center;
+    letter-spacing: 0.05em;
+    word-spacing: 0.05em;
+    font-family: Georgia, Times, serif;
+    background: #fff;
+    background: rgba(255,255,255,0.7);
+    color: #555;
+    text-shadow: -1px -1px 0 rgba(255,255,255,0.3);
+  }
+  /* fonction d'animation, n'oubliez pas de prefixer ! */
+  @keyframes slider {
+    0%, 20%, 100% { left: 0 }
+    25%, 45%    { left: -100% }
+    50%, 70%    { left: -200% }
+    75%, 95%    { left: -300% }
+  }
+  /* complétez le sélecteur : */
+  #slideshow .slider {
+    /* ... avec la propriété animation */
+    animation: slider 32s infinite;
+  }
+  #timeline {
+    position: absolute;
+    background: #999;
+    bottom: 15px;
+    left: 15px;
+    height: 1px;
+    background: rgb(214,98,13);
+    background: rgba(214,98,13,.8);
+    width: 0;
+    /* fonction d'animation */
+    animation: timeliner 32s infinite;
+  }
+  @keyframes timeliner {
+    0%, 25%, 50%, 75%, 100% { width: 0;   }
+    20%, 45%, 70%, 90%    { width: 640px; }
+  }
+  @keyframes figcaptionner {
+    0%, 25%, 50%, 75%, 100%           { bottom: -55px;  }
+    5%, 20%, 30%, 45%, 55%, 70%, 80%, 95%   { bottom: 5px;    }
+  }
+  /* ajouter à l'élément : */
+  #slideshow figcaption {
+    /* ... la propriété animation */
+    animation: figcaptionner 32s infinite;
+  }
+  .play_commands {
+    /* positionnement en haut à droite */ 
+    position: absolute;
+    top: 25px; right: 25px;
+    z-index: 10;
+    /* dimensionnement des icônes */
+    width: 22px;
+    height: 22px;
+    text-indent: -9999px;
+    border:0 none;
+    /* placez l'opacité à 1 si vous souhaitez voir les commandes */
+    opacity: 0;
+    /* préparation de transition sur opacicty et right */
+    transition: opacity 1s, right 1s;
+  }
+  /* on décale play légèrement sur la gauche */
+  .play { right: 55px; cursor: default; }
+   
+  /* création de l'icône pause avec 2 pseudos éléments */
+  .pause:after,
+  .pause:before {
+    position: absolute;
+    display: block;
+    content: " ";
+    top:0;
+    width:38%;
+    height: 22px;
+    background: #fff;
+    background: rgba(255,255,255,0.5);
+  }
+  .pause:after { right:0; }
+  .pause:before { left:0; }
+   
+  /* création de l'icône play avec des bordures */
+  .play {
+    width: 1px; 
+    height: 1px; 
+    /* les transparentes forment la flèche */
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 20px solid #fff; 
+    border-left: 20px solid rgba(255,255,255,0.5); 
+    /* renseignez 1 pour voir l'icône de suite */
+    opacity: 0;
+  }
+   
+  /* apparition du bouton pause au survole */
+  /* apparition des boutons au focus */
+  #slideshow:hover .pause,
+  .play_commands:focus {
+    opacity: 1;
+    outline: none;
+  }
+  /* stopper les animation */
+  .sl_command:target ~ #slideshow .slider,
+  .sl_command:target ~ #slideshow figcaption,
+  .sl_command:target ~ #slideshow #timeline,
+  .sl_command:target ~ #slideshow .dots_commands li:first-child a:after {
+    animation-play-state: paused;
+  }
+   
+  /* redémarrer les animations */
+  #sl_play:target ~ #slideshow .slider,
+  #sl_play:target ~ #slideshow figcaption,
+  #sl_play:target ~ #slideshow #timeline,
+  #sl_play:target ~ #slideshow .dots_commands li:first-child a:after {
+    animation-play-state: running;
+  }
+   
+  /* switch entre les boutons */
+  .sl_command:target ~ #slideshow .pause    { opacity:0; }
+  #sl_play:target ~ #slideshow:hover .pause,
+  #sl_play:target ~ #slideshow .pause:focus   { opacity:1; }
+  .sl_command:target ~ #slideshow .play     { opacity:1; right: 25px; cursor: pointer; }
+  #sl_play:target ~ #slideshow .play      { opacity:0; right: 55px; cursor: default; }
+  #slideshow .commands {
+    position: absolute;
+    top: 45%;
+    padding: 5px 13px;
+    border-bottom:0;
+    font-size: 1.3em;
+      color: #aaa;
+    text-decoration:none;
+    background-color: #eee;
+    background-image: linear-gradient(#fff,#ddd);
+    text-shadow: 0 0 1px #aaa;
+    border-radius: 50%;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+   
+  #slideshow .prev { left: -48px; }
+  #slideshow .next { right: -48px; }
+   
+  #slideshow .commands { display:none; }
+  #slideshow .commands1 { display: block; }
+  #slideshow .c_slider {
+    position: absolute;
+    left:0; top:0;
+    width: 400%;
+    height: 310px;
+    /* multiple background */
+    background: url(img/dummy-640x310-1.jpg) 0 0 no-repeat,
+                url(img/dummy-640x310-2.jpg) 640px 0 no-repeat,
+                url(img/dummy-640x310-3.jpg) 1280px 0 no-repeat,
+                url(img/dummy-640x310-4.jpg) 1920px 0 no-repeat;
+    transition: background 1s;
+  }
