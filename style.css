@@ -948,6 +948,11 @@ li.social-links a {
     display: block;
     margin-top: 20px;
 }
+.testi-meta2 {
+    display: block;
+    margin-left: 290px;
+    margin-top: -61px;
+}
 
 .testimonial h4 {
     font-size: 18px;
@@ -1310,7 +1315,7 @@ li.social-links a {
 }
 
 .post-media img {
-    width: 100%;
+    width: 70%;
 }
 
 .playbutton {
@@ -2867,7 +2872,7 @@ select.mobile-device {
 
 
 .banner-bg-1{
-	background: url(uploads/inner-bg.jpg);
+	background: url(img/slider_02.jpg);
 	padding: 120px 0;	
 	background-clip: initial;
 	background-color: rgba(0, 0, 0, 0);
