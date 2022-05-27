@@ -225,7 +225,7 @@ div.aligncenter {
 
 .alignleft {
     float: left;
-    margin: 10px 20px 20px 0;
+    margin: -12px 10px 129px 0;
 }
 
 a img.alignright {
@@ -946,12 +946,22 @@ li.social-links a {
 
 .testi-meta {
     display: block;
-    margin-top: 20px;
+    margin-top: 170px;
 }
 .testi-meta2 {
     display: block;
     margin-left: 290px;
-    margin-top: -61px;
+    margin-top: -60px;
+}
+.testi-meta3 {
+    display: block;
+    margin-left: 605px;
+    margin-top: -60px;
+}
+.testi-meta4 {
+    display: block;
+    margin-left: 915px;
+    margin-top: -60px;
 }
 
 .testimonial h4 {
