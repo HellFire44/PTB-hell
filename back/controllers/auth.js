@@ -8,6 +8,7 @@ const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
+    console.log(req.body);
     // On hash le mot de passe
     bcrypt.hash(req.body.password, 10)
         // Si tout est OK on continue
