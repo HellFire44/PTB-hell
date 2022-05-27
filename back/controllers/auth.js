@@ -1,3 +1,12 @@
+// Importe BCRYPT (sert à crypter les mdp)
+const bcrypt = require('bcrypt');
+
+// Importe le model User
+const User = require('../models/Users');
+
+// Sert à gerer les connexions
+const jwt = require('jsonwebtoken');
+
 exports.signup = (req, res, next) => {
     // On hash le mot de passe
     bcrypt.hash(req.body.password, 10)
