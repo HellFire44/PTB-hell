@@ -272,6 +272,8 @@
                 if (response.success) {
                     // On affiche un message de succès
                     alert('Votre compte a été créé avec succès');
+                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('userId', response.userId);
                     window.location.href = 'index.html';
                 } else {
                     // Sinon un message d'erreur

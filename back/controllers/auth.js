@@ -8,7 +8,6 @@ const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) => {
-    console.log(req.body);
     // On hash le mot de passe
     bcrypt.hash(req.body.password, 10)
         // Si tout est OK on continue
@@ -19,10 +18,22 @@ exports.signup = (req, res, next) => {
                 password: hash,
                 username: req.body.username
             });
+
+            const token = jwt.sign({
+                email: user.email,
+                userId: user._id,
+                username: user.username
+            }, `${process.env.secretKey}`, {
+                // La session de l'utilisateur va durer 1h ensuite il devra se reconnecter
+                expiresIn: '1h'
+            });
+
             user.save()
                 // Si tout est OK on retourne un message de succès
                 .then(() => res.status(201).json({
-                    message: 'Utilisateur créé !'
+                    message: 'Utilisateur créé !',
+                    token: token,
+                    userId: user._id
                 }))
                 // Sinon on retourne un message d'erreur
                 .catch(error => res.status(400).json({
