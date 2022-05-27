@@ -5,7 +5,11 @@ const router = express.Router();
 const authController = require('../controllers/auth');
 
 // Definition de la route
+
+// l'url total c'est /api/auth/signup
 router.post('/signup', authController.signup);
+
+// l'url total c'est /api/auth/login
 router.post('/login', authController.login);
 
 module.exports = router;
