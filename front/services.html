@@ -38,7 +38,7 @@
 </head>
 <body>
 
-    <!-- LOADER -->
+<!-- LOADER -->
     <div id="preloader">
         <div class="loader">
 			<div class="loader__bar"></div>
@@ -48,19 +48,16 @@
 			<div class="loader__bar"></div>
 			<div class="loader__ball"></div>
 		</div>
-    </div><!-- end loader -->
-    <!-- END LOADER -->
-    
+    </div>
+
+<!-- Top Bar-->
 	<div class="top-bar">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-6 col-sm-6">
 					<div class="left-top">
 						<div class="email-box">
-							<a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i> youremail@gmail.com</a>
-						</div>
-						<div class="phone-box">
-							<a href="tel:1234567890"><i class="fa fa-phone" aria-hidden="true"></i> +1 234 567 890</a>
+							<a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i> contact-ptb@gmail.fr</a>
 						</div>
 					</div>
 				</div>
@@ -68,11 +65,11 @@
 					<div class="right-top">
 						<div class="social-box">
 							<ul>
-								<li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-rss-square" aria-hidden="true"></i></a></li>
+								<!-- <li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li> -->
+								<!-- <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> -->
+								<!-- <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li> -->
+								<!-- <li><a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li> -->
+								<!-- <li><a href="#"><i class="fa fa-rss-square" aria-hidden="true"></i></a></li> -->
 							<ul>
 						</div>
 					</div>
@@ -80,6 +77,8 @@
 			</div>
 		</div>
 	</div>
+
+<!-- Header Nav-Bar-->
     <header class="header header_style_01">
         <nav class="megamenu navbar navbar-default">
             <div class="container-fluid">
@@ -109,15 +108,16 @@
         </nav>
     </header>
 
+<!-- Banniere Principale -->
    	<div class="banner-area banner-bg-1">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="banner">
-						<h2>Our Services</h2>
+						<h2>Tournois de Palet sur Fonte</h2>
 						<ul class="page-title-link">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Our Services</a></li>
+							<li><a href="#">Informations</a></li>
+							<li><a href="#">Inscription</a></li>
 						</ul>
 					</div>
 				</div>
@@ -125,17 +125,18 @@
 		</div>
 	</div>
 
+<!-- Box Informations-->
     <div id="about" class="section wb">
         <div class="container">
            <div class="row text-center">
 				<div class="col-md-3 col-sm-6">
 					<div class="about-item">
 						<div class="about-icon">
-							<span class="icon icon-display"></span>
+							<span>80</span>
 						</div>
 						<div class="about-text">
-							<h3> <a href="#">Lorem ipsum dolor. </a></h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ea, quis magnam deserunt. </p>
+							<h3> <a href="#">Nombres d'Équipes</a></h3>
+							<p>le nombres maximun d'équipe et de 80 </p>
 						</div>
 					</div>
 				</div>
@@ -173,71 +174,99 @@
 					</div>
 				</div>
 			</div>
-        </div><!-- end container -->
-    </div><!-- end section -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="contact_form">
+                <div id="message"></div>
+                <form id="contactform" name="contactform">
+                    <fieldset class="row-fluid">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input type="text" name="username" id="username" class="form-control"
+                                placeholder="Nom Prénom | Joueur 1">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input type="text" name="username" id="username" class="form-control"
+                                placeholder="Nom Prénom | Joueur 2">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input type="email" name="email" id="email" class="form-control"
+                                placeholder="E-Mail">
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+                            <button type="submit" value="SEND" id="submit"
+                                class="btn btn-light btn-radius btn-brd grd1 btn-block">Valider</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
 	
 	<div id="services" class="parallax section lb">
         <div class="container">
             <div class="section-title text-center">
-                <h3>Our Service</h3>
-                <p class="lead">Our Service unlimited solutions to all your business needs. in the installation package we prepare search engine optimization, social media support, we provide corporate identity and graphic design services.</p>
-            </div><!-- end title -->
+                <h3>Tableau Inscriptions Tournois de Palet</h3>
+                <p class="lead">Réferencement de tout les équipe inscrite pour le tournois | une fois que vous voyez votre nom sur le tableau sela s'innivira que votre équipe et inscrite au tournois</p>
+            </div>
 
-            <div class="owl-services owl-carousel owl-theme">
+            <table border="5" width="70%" align="center">
+                <tr>
+                    <td>Numéro d'Équipe</td>
+                    <td>Joueur 1</td>
+                    <td>Joueur 2</td>
+                </tr>
+                <tr>
+                    <td>Équipe 1</td>
+                    <td>Joueur 1</td>
+                    <td>Joueur 2</td>
+                </tr>
+                <tr>
+                    <td>Équipe 2</td>
+                    <td>Joueur 1</td>
+                    <td>Joueur 2</td>
+                </tr>
+                <tr>
+                    <td>Équipe 3</td>
+                    <td>Joueur 1</td>
+                    <td>Joueur 2</td>
+                </tr>
+                <tr>
+                    <td>Équipe 4</td>
+                    <td>Joueur 1</td>
+                    <td>Joueur 2</td>
+                </tr>
+                <tr>
+                    <td>Équipe 5</td>
+                    <td>Joueur 1</td>
+                    <td>Joueur 2</td>
+                </tr>
+                <tr>
+                    <td>Équipe 6</td>
+                    <td>Joueur 1</td>
+                    <td>Joueur 2</td>
+                </tr>
+            </table>
+             
+                
+
                 <div class="service-widget">
                     <div class="post-media wow fadeIn">
-                        <a href="uploads/service_01.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                        <img src="uploads/service_01.jpg" alt="" class="img-responsive img-rounded">
                     </div>
-					<div class="service-dit">
-						<h3>Smart Swatch Editions</h3>
-						<p>Aliquam sagittis ligula et sem lacinia, ut facilisis enim sollicitudin. Proin nisi est, convallis nec purus vitae, iaculis posuere sapien. Cum sociis natoque.</p>
-					</div>
                 </div>
-                <!-- end service -->
+                
 
                 <div class="service-widget">
                     <div class="post-media wow fadeIn">
-                        <a href="uploads/service_02.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                        <img src="uploads/service_02.jpg" alt="" class="img-responsive img-rounded">
                     </div>
-					<div class="service-dit">
-						<h3>Web UI Kit Design</h3>
-						<p>Duis at tellus at dui tincidunt scelerisque nec sed felis. Suspendisse id dolor sed leo rutrum euismod. Nullam vestibulum fermentum erat. It nam auctor. </p>
-					</div>
                 </div>
-                <!-- end service -->
-
-                <div class="service-widget">
-                    <div class="post-media wow fadeIn">
-                        <a href="uploads/service_03.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                        <img src="uploads/service_03.jpg" alt="" class="img-responsive img-rounded">
-                    </div>
-					<div class="service-dit">
-						<h3>Mobile Optimization</h3>
-						<p>Etiam materials ut mollis tellus, vel posuere nulla. Etiam sit amet lacus vitae massa sodales aliquam at eget quam. Integer ultricies et magna quis accumsan.</p>
-					</div>
-                </div>
-                <!-- end service -->
-
-                <div class="service-widget">
-                    <div class="post-media wow fadeIn">
-                        <a href="uploads/service_04.jpg" data-rel="prettyPhoto[gal]" class="hoverbutton global-radius"><i class="flaticon-unlink"></i></a>
-                        <img src="uploads/service_04.jpg" alt="" class="img-responsive img-rounded">
-                    </div>
-					<div class="service-dit">
-						<h3>Digital Design for Mac</h3>
-						<p>Praesent in neque congue sapien lobortis faucibus id eget erat. <br>Pellentesque maximus rutrum felis. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-					</div>
-                </div>
-                <!-- end service -->
-            </div><!-- end row -->
+                
+            </div>
 
             <hr class="hr1">
 
-            <div class="text-center">
-                <a data-scroll href="#portfolio" class="btn btn-light btn-radius btn-brd">View Our Portfolio</a>
-            </div>
         </div><!-- end container -->
     </div><!-- end section -->
 
