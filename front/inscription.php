@@ -1,3 +1,32 @@
+<?php
+include './includes/database.php';
+
+if(isset($_POST['SubmitButton']))
+{
+    if(!empty($_POST['users_name']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['cpassword'])) 
+    {
+        if($_POST['password'] == $_POST['cpassword'])
+        {
+            $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+            $query = $db->prepare("INSERT INTO users (users_name, email, password) VALUES (:users_name, :email, :password)");
+            $query->execute([
+                'users_name' => $_POST['users_name'],
+                'email' => $_POST['email'],
+                'password' => $hashedPassword
+            ]);
+        }
+        else
+        {
+            echo "Les mots de passe ne correspondent pas";
+        }
+    }
+    else
+    {
+        echo "Tout les champs ne sont pas remplis";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -138,7 +167,7 @@
                 <div class="col-md-8">
                     <div class="contact_form">
                         <div id="message"></div>
-                        <form id="contactform" name="contactform" action="">
+                        <form action="" method="post">
                             <fieldset class="row-fluid">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <input type="text" name="users_name" id="users_name" class="form-control"
@@ -157,7 +186,7 @@
                                         placeholder="Confirmer votre mot de passe">
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
-                                    <button type="submit" value="SEND" id="submit"
+                                    <button type="submit" value="SEND" id="submit" name="SubmitButton"
                                         class="btn btn-light btn-radius btn-brd grd1 btn-block">Valider</button>
                                 </div>
                             </fieldset>
@@ -246,39 +275,3 @@
 </body>
 
 </html>
-
-<?php
-        var_dump($_POST);
-        // if(isset($_POST['formsend'])){
-        //     $password = $_POST['password'];  
-        //     $username = $_POST['users_name'];
-        //     $email = $_POST['email'];  
-            
-            
-        //     extract($_POST);
-
-        //     if(!empty($password) && !empty($cpassword) && !empty($email) && !empty($username)){
-
-        //         if($password == $cpassword){
-
-        //             $options = [
-        //                 'cost' => 12,
-        //             ];
-
-        //             $hashpass = password_hash($password, PASSWORD_BCRYPT, $options);
-
-        //             include 'includes/database.php';
-        //             global $db;
-
-        //             $q = $db->prepare("INSERT INTO users(email,password,username) VALUES(:email,:password:username)");
-        //             $q->execute([
-        //                 'users_name' => $username,
-        //                 'email' => $email,
-        //                 'password' => $hashpass
-        //             ]);
-        //         }
-        //     }else {
-        //         echo "les champs ne sont pas tous remplies";
-        //     }
-        // }
-    ?>
