@@ -89,19 +89,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="images/logos/logo.png" alt="image" width="60px"></a>
+                    <a class="navbar-brand" href="index.php"><img src="images/logos/logo.png" alt="image" width="60px"></a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="about-us.html">À propos de nous</a></li>
-                        <li><a class="active" href="services.html">Tournois de Palets</a></li>
-                        <li><a href="portfolio.html">Galerie Images</a></li>
-                        <!-- <li><a href="features.html">Features</a></li> -->
-                        <!-- <li><a href="testimonials.html">Testimonials</a></li> -->
-                        <!-- <li><a href="pricing.html">Pricing</a></li> -->
-						<li><a href="contact.html">Contact</a></li>
-                        <li><a href="connexion.html">Connexion</a></li>
+                        <li><a href="index.php">Accueil</a></li>
+                        <li><a href="about-us.php">À propos de nous</a></li>
+                        <li><a class="active" href="services.php">Tournois de Palets</a></li>
+                        <li><a href="portfolio.php">Galerie Images</a></li>
+                        <!-- <li><a href="features.php">Features</a></li> -->
+                        <!-- <li><a href="testimonials.php">Testimonials</a></li> -->
+                        <!-- <li><a href="pricing.php">Pricing</a></li> -->
+						<li><a href="contact.php">Contact</a></li>
+                        <li><a href="connexion.php">Connexion</a></li>
                     </ul>
                 </div>
             </div>
@@ -136,7 +136,7 @@
 						</div>
 						<div class="about-text">
 							<h3> <a href="#">Nombres d'Équipes</a></h3>
-							<p>le nombres maximun d'équipes et de 800 </p>
+							<p>le nombres maximun d'équipes et de 80 </p>
 						</div>
 					</div>
 				</div>
