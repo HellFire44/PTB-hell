@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +11,10 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
+    <!-- page css -->
+    <link href="dist/css/pages/floating-label.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -588,13 +573,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Float Input</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Float Input</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,101 +592,95 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Animated Line Inputs Form With Floating Labels</h4>
+                                <h6 class="card-subtitle">Just add <code>floating-labels</code> class to the form.</h6>
+                                <form class="floating-labels m-t-40">
+                                    <div class="form-group m-b-40">
+                                        <input type="text" class="form-control" id="input1">
+                                        <span class="bar"></span>
+                                        <label for="input1">Regular Input</label>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
-                                        </div>
+                                    <div class="form-group m-b-40">
+                                        <input type="password" class="form-control" id="input2">
+                                        <span class="bar"></span>
+                                        <label for="input2">Password</label>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
+                                    <div class="form-group m-b-40">
+                                        <input type="text" class="form-control" id="input3">
+                                        <span class="bar"></span>
+                                        <label for="input3">Placeholder</label>
+                                    </div>
+                                    <div class="form-group m-b-40">
+                                        <input type="text" class="form-control" id="input4">
+                                        <span class="bar"></span>
+                                        <label for="input4">Helping text</label>
+                                        <span class="help-block"><small>A block of help text that breaks onto a new line and may extend beyond one line.</small></span> </div>
+                                    <div class="form-group m-b-40">
+                                        <input type="text" class="form-control" id="input5" data-bs-toggle="tooltip" data-placement="bottom" title="input with tooltip!!">
+                                        <span class="bar"></span>
+                                        <label for="input5">Input with tooltip</label>
+                                    </div>
+                                    <div class="form-group m-b-40">
+                                        <select class="form-select" id="input6">
+                                            <option></option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                        </select><span class="bar"></span>
+                                        <label for="input6">Gender</label>
+                                    </div>
+                                    <div class="form-group m-b-5">
+                                        <textarea class="form-control" rows="4" id="input7"></textarea>
+                                        <span class="bar"></span>
+                                        <label for="input7">Text area</label>
                                     </div>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Animated Line Inputs Form With Floating Labels</h4>
+                                <h6 class="card-subtitle">Just add <code>floating-labels</code> class to the form and <code>has-warning, has-success, has-danger & has-error</code> for various inputs. For input with icon add <code>has-feedback</code> class.</h6>
+                                <form class="floating-labels m-t-40">
+                                    <div class="form-group m-b-40">
+                                        <input type="text" class="form-control input-lg" id="input8"><span class="bar"></span>
+                                        <label for="input8">Large Input</label>
+                                    </div>
+                                    <div class="form-group m-b-40">
+                                        <input type="text" class="form-control input-sm" id="input9"><span class="bar"></span>
+                                        <label for="input9">Small Input</label>
+                                    </div>
+                                    <div class="form-group has-warning m-b-40">
+                                        <input type="text" class="form-control" id="input10"><span class="bar"></span>
+                                        <label for="input10">Warning State</label>
+                                    </div>
+                                    <div class="form-group has-success m-b-40">
+                                        <input type="text" class="form-control" id="input11"><span class="bar"></span>
+                                        <label for="input11">Success State</label>
+                                    </div>
+                                    <div class="form-group has-error has-danger m-b-40">
+                                        <input type="text" class="form-control" id="input12"><span class="bar"></span>
+                                        <label for="input12">Error State</label>
+                                    </div>
+                                    <div class="form-group has-warning has-feedback m-b-40">
+                                        <input type="text" class="form-control form-control-warning" id="input13"><span class="bar"></span>
+                                        <label for="input13">Warning State With Feedback</label>
+                                    </div>
+                                    <div class="form-group has-success has-feedback m-b-40">
+                                        <input type="text" class="form-control form-control-success" id="input14"><span class="bar"></span>
+                                        <label for="input14">Success State With Feedback</label>
+                                    </div>
+                                    <div class="form-group has-danger has-error has-feedback m-b-5">
+                                        <input type="text" class="form-control form-control-danger" id="input15"><span class="bar"></span>
+                                        <label for="input15">Error State With Feedback</label>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -797,15 +776,11 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
+    <script src="dist/js/pages/jasny-bootstrap.js"></script>
 </body>
 
 </html>

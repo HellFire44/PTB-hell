@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +11,11 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
+    <link href="assets/node_modules/css-chart/css-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
+    <!-- page css -->
+    <link href="dist/css/pages/easy-pie-chart.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -588,13 +574,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Extra Charts</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Extra Charts</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,101 +593,131 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <!-- column -->
+                    <div class="col-lg-12">
                         <div class="card">
-                            <div class="">
+                            <div class="card-body">
+                                <h4 class="card-title">Easy Pie Chart</h4>
+                                <h6 class="card-subtitle">Add code in span <code> class="chart easy-pie-chart-1"</code> to create chart</h6>
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
-                                                </div>
-                                            </div>
+                                    <div class="col-lg-2 col-md-6 m-b-30">
+                                        <div class="chart easy-pie-chart-1" data-percent="75"> <span class="percent">75</span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 m-b-30">
+                                        <div class="chart easy-pie-chart-2" data-percent="75"> <span class="percent">75</span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 m-b-30">
+                                        <div class="easy-pie-chart-3 chart pie-chart" data-percent="25"> <span>25.00 <br>
+                                            <small class="text-muted">/100mb</small></span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 m-b-30">
+                                        <div class="chart easy-pie-chart-4" data-percent="75"> <span class="percent">75</span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 m-b-30">
+                                        <div class="chart easy-pie-chart-5" data-percent="75"> <span class="percent">75</span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6">
+                                        <div class="easy-pie-chart-6 chart pie-chart" data-percent="25"> <span>25.00 <br>
+                                          <small class="text-muted">/100mb</small></span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                </div>
+                                <div class="row m-t-40">
+                                    <div class="col-12">
+                                        <br>
+                                        <br>
+                                        <h4 class="card-title">Easy Pie Avtar Chart</h4>
+                                        <h6 class="card-subtitle">Just add in div<code> class="chart easy-pie-chart-1"</code></h6>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 m-b-30">
+                                        <div class="chart easy-pie-chart-1" data-percent="75"> <span><img src="assets/images/users/1.jpg" alt="user" class="img-circle"></span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 m-b-30">
+                                        <div class="chart easy-pie-chart-2" data-percent="75"> <span><img src="assets/images/users/2.jpg" alt="user" class="img-circle"></span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 m-b-30">
+                                        <div class="easy-pie-chart-3 chart" data-percent="25"> <span><img src="assets/images/users/3.jpg" alt="user" class="img-circle"></span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 m-b-30">
+                                        <div class="chart easy-pie-chart-4" data-percent="75"> <span><img src="assets/images/users/4.jpg" alt="user" class="img-circle"></span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 m-b-30">
+                                        <div class="chart easy-pie-chart-5" data-percent="75"> <span><img src="assets/images/users/5.jpg" alt="user" class="img-circle"></span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6">
+                                        <div class="easy-pie-chart-6 chart" data-percent="25"> <span><img src="assets/images/users/6.jpg" alt="user" class="img-circle"></span> <canvas height="200" width="200" style="height: 100px; width: 100px;"></canvas></div>
+                                    </div>
+                                </div>
+                                <div class="row m-t-40">
+                                    <div class="col-12">
+                                        <br>
+                                        <br>
+                                        <h4 class="card-title">Css Charts</h4>
+                                        <h6 class="card-subtitle m-b-15">Just add class <code>.css-bar</code> and data lable </h6>
+                                    </div>
+                                    <div class="row m-t-20">
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="10%" class="css-bar css-bar-10 css-bar-lg css-bar-default"></div>
+                                        </div>
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="20%" class="css-bar css-bar-20 css-bar-lg"></div>
+                                        </div>
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="30%" class="css-bar css-bar-30 css-bar-lg css-bar-success"></div>
+                                        </div>
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="40%" class="css-bar css-bar-40 css-bar-lg css-bar-warning"></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
+                                </div>
+                                <div class="row m-t-40">
+                                    <div class="col-12">
+                                        <br>
+                                        <br>
+                                        <h4 class="card-title">All Size</h4>
+                                        <h6 class="card-subtitle m-b-15"><code>.css-bar-lg</code>, <code>.css-bar</code>, <code>.css-bar-sm</code>, <code>.css-bar-xs</code></h6>
+                                    </div>
+                                    <div class="row m-t-20">
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="10%" class="css-bar css-bar-10 css-bar-lg css-bar-default"></div>
+                                        </div>
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="20%" class="css-bar css-bar-20 css-bar-lg css-bar"></div>
+                                        </div>
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="30%" class="css-bar css-bar-30 css-bar-lg css-bar-success"></div>
+                                        </div>
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="40%" class="css-bar css-bar-40 css-bar-lg css-bar-warning"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-t-40">
+                                    <div class="col-12">
+                                        <br>
+                                        <br>
+                                        <h4 class="card-title">Chart With image</h4>
+                                        <h6 class="card-subtitle m-b-15">put image between div</h6>
+                                    </div>
+                                    <div class="row m-t-20">
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="10%" class="css-bar css-bar-10 css-bar-lg css-bar-default"><img src="assets/images/users/1.jpg" alt="User"></div>
+                                        </div>
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="20%" class="css-bar css-bar-20 css-bar-lg"><img src="assets/images/users/2.jpg" alt="User"></div>
+                                        </div>
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="30%" class="css-bar css-bar-30 css-bar-lg css-bar-success"><img src="assets/images/users/3.jpg" alt="User"></div>
+                                        </div>
+                                        <div class="col-lg-3 m-b-30">
+                                            <div data-label="40%" class="css-bar css-bar-40 css-bar-lg css-bar-warning"><img src="assets/images/users/4.jpg" alt="User"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- column -->
                 </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -797,15 +813,16 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!-- EASY PIE CHART JS -->
+    <script src="assets/node_modules/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+    <script src="assets/node_modules/jquery.easy-pie-chart/easy-pie-chart.init.js"></script>
 </body>
 
 </html>

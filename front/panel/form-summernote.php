@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +11,8 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
+    <!-- This Page CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/node_modules/summernote/dist/summernote-bs4.css">
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -588,13 +573,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Summernote</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Summernote</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,101 +592,37 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
-                                        </div>
-                                    </div>
+                            <div class="card-body">
+                                <div class="summernote">
+                                    <h3 class="text-white">Default Summernote</h3>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="inline-editor">
+                                    <h4 class="card-title m-b-40">You can select content and edit inline</h4>
+                                    <h3>Title Heading will be <b>apear here</b></h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elitconsectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    <ul class="list-icons">
+                                        <li><i class="fa fa-check text-success"></i> Lorem ipsum dolor sit amet</li>
+                                        <li><i class="fa fa-check text-success"></i> Consectetur adipiscing elit</li>
+                                        <li><i class="fa fa-check text-success"></i> Integer molestie lorem at massa </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="click2edit m-b-40">Click on Edite button and change the text then save it.</div>
+                                <button id="edit" class="btn btn-info btn-rounded text-white" onclick="edit()" type="button">Edit</button>
+                                <button id="save" class="btn btn-success btn-rounded text-white" onclick="save()" type="button">Save</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -797,15 +718,34 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
+    <script src="assets/node_modules/summernote/dist/summernote-bs4.min.js"></script>
+    <script>
+    $(function() {
+
+        $('.summernote').summernote({
+            height: 350, // set editor height
+            minHeight: null, // set minimum height of editor
+            maxHeight: null, // set maximum height of editor
+            focus: false // set focus to editable area after initializing summernote
+        });
+
+        $('.inline-editor').summernote({
+            airMode: true
+        });
+
+    });
+
+    window.edit = function() {
+            $(".click2edit").summernote()
+        },
+        window.save = function() {
+            $(".click2edit").summernote('destroy');
+        }
+    </script>
 </body>
 
 </html>

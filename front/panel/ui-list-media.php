@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +11,11 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/node_modules/prism/prism.css">
+    <!-- page css -->
+    <link href="dist/css/pages/other-pages.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -588,13 +574,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">List Media</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">List Media</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,101 +593,462 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="">
+                            <div class="card-body">
+                                <!-- .row -->
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
+                                    <div class="col-md-4 col-sm-4 mt-4">
+                                        <h4 class="card-title">Basic example <a class="get-code" data-bs-toggle="collapse" href="#pgr1" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                                        <div class="collapse mt-3 well" id="pgr1" aria-expanded="true">
+                                            <pre class="language-html scrollable">
+                                                 <code>
+                                                    &lt;ul class="list-group"&gt;<br/>
+                                                        &lt;li class="list-group-item"&gt;Cras justo odio&lt;/li&gt;<br/>
+                                                        &lt;li class="list-group-item"&gt;Dapibus ac facilisis in&lt;/li&gt;<br/>
+                                                        &lt;li class="list-group-item"&gt;Morbi leo risus&lt;/li&gt;<br/>
+                                                        &lt;li class="list-group-item"&gt;Porta ac consectetur ac&lt;/li&gt;<br/>
+                                                        &lt;li class="list-group-item"&gt;Vestibulum at eros&lt;/li&gt;<br/>
+                                                    &lt;/ul&gt;
+                                              </code></pre> </div>
+                                        <ul class="list-group">
+                                            <li class="list-group-item">Cras justo odio</li>
+                                            <li class="list-group-item">Dapibus ac facilisis in</li>
+                                            <li class="list-group-item">Morbi leo risus</li>
+                                            <li class="list-group-item">Porta ac consectetur ac</li>
+                                            <li class="list-group-item">Vestibulum at eros</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 mt-4">
+                                        <h4 class="card-title">Linked items <a class="get-code" data-bs-toggle="collapse" href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                                        <div class="collapse mt-3 well" id="pgr2" aria-expanded="true">
+                                            <pre class="language-html scrollable">
+                                                <code>
+                                                    &lt;div class="list-group"&gt;<br/>
+                                                        &lt;a href="javascript:void(0)" class="list-group-item active"&gt;Cras justo odio&lt;/a&gt;
+                                                        &lt;a href="javascript:void(0)" class="list-group-item"&gt;Dapibus ac facilisis in&lt;/a&gt;
+                                                        &lt;a href="javascript:void(0)" class="list-group-item"&gt;Morbi leo risus&lt;/a&gt;
+                                                        &lt;a href="javascript:void(0)" class="list-group-item"&gt;Porta ac consectetur ac&lt;/a&gt;
+                                                        &lt;a href="javascript:void(0)" class="list-group-item"&gt;Vestibulum at eros&lt;/a&gt;
+                                                    &lt;/div&gt;
+                                                </code> 
+                                            </pre></div>
+                                        <div class="list-group"> <a href="javascript:void(0)" class="list-group-item active">Cras justo odio</a> <a href="javascript:void(0)" class="list-group-item">Dapibus ac facilisis in</a> <a href="javascript:void(0)" class="list-group-item">Morbi leo risus</a> <a href="javascript:void(0)" class="list-group-item">Porta ac consectetur ac</a> <a href="javascript:void(0)" class="list-group-item">Vestibulum at eros</a> </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 mt-4">
+                                        <h4 class="card-title">With Badges <a class="get-code" data-bs-toggle="collapse" href="#pgr3" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                                        <div class="collapse mt-3 well" id="pgr3" aria-expanded="true">
+                                            <pre class="language-html scrollable">
+                                                <code>
+                                                    &lt;ul class="list-group list-group-full"&gt;<br/>
+                                                        &lt;li class="list-group-item"&gt;<br/>
+                                                          &lt;span class="badge bg-success"&gt;6&lt;/span&gt; Cras justo odio
+                                                        &lt;/li&gt;<br/>
+                                                        &lt;li class="list-group-item"&gt;<br/>
+                                                          Dapibus ac facilisis in
+                                                        &lt;/li&gt;<br/>
+                                                        &lt;li class="list-group-item"&gt;<br/>
+                                                          &lt;span class="badge bg-danger"&gt;3&lt;/span&gt; Morbi leo risus
+                                                        &lt;/li&gt;<br/>
+                                                        &lt;li class="list-group-item active"&gt;<br/>
+                                                          &lt;span class="badge bg-info"&gt;10&lt;/span&gt; Porta ac consectetur ac
+                                                        &lt;/li&gt;<br/>
+                                                        &lt;li class="list-group-item"&gt;<br/>
+                                                          Vestibulum at eros
+                                                        &lt;/li&gt;<br/>
+                                                    &lt;/ul&gt;
+                                              </code> </pre>
+                                        </div>
+                                        <ul class="list-group list-group-full">
+                                            <li class="list-group-item"> Cras justo odio <span class="badge bg-info ms-auto">6</span></li>
+                                            <li class="list-group-item"> Dapibus ac facilisis in </li>
+                                            <li class="list-group-item"> Morbi leo risus <span class="badge bg-danger ms-auto">3</span></li>
+                                            <li class="list-group-item active"> Porta ac consectetur ac <span class="badge bg-success ms-auto">10</span></li>
+                                            <li class="list-group-item"> Vestibulum at eros </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- / .row -->
+                                <!-- .row -->
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 mt-4">
+                                        <h4 class="card-title">Button items <a class="get-code" data-bs-toggle="collapse" href="#pgr4" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                                        <div class="collapse mt-3 well" id="pgr4" aria-expanded="true">
+                                            <pre class="language-html scrollable">
+                                                <code>
+                                                    &lt;div class=&quot;list-group&quot;&gt;
+                                                        &lt;button type=&quot;button&quot; class=&quot;list-group-item&quot;&gt;Cras justo odio&lt;/button&gt;
+                                                        &lt;button type=&quot;button&quot; class=&quot;list-group-item&quot;&gt;Dapibus ac facilisis in&lt;/button&gt;
+                                                        &lt;button type=&quot;button&quot; class=&quot;list-group-item&quot;&gt;Morbi leo risus&lt;/button&gt;
+                                                        &lt;button type=&quot;button&quot; class=&quot;list-group-item&quot;&gt;Porta ac consectetur ac&lt;/button&gt;
+                                                        &lt;button type=&quot;button&quot; class=&quot;list-group-item&quot;&gt;Vestibulum at eros&lt;/button&gt;
+                                                    &lt;/div&gt;
+                                              </code> </pre>
+                                        </div>
+                                        <div class="list-group">
+                                            <button type="button" class="list-group-item">Cras justo odio</button>
+                                            <button type="button" class="list-group-item">Dapibus ac facilisis in</button>
+                                            <button type="button" class="list-group-item">Morbi leo risus</button>
+                                            <button type="button" class="list-group-item">Porta ac consectetur ac</button>
+                                            <button type="button" class="list-group-item">Vestibulum at eros</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 mt-4">
+                                        <h4 class="card-title">Disabled items <a class="get-code" data-bs-toggle="collapse" href="#pgr5" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                                        <div class="collapse mt-3 well" id="pgr5" aria-expanded="true">
+                                            <pre class="language-html scrollable">
+                                                <code>
+                                                    &lt;div class=&quot;list-group&quot;&gt;
+                                                        &lt;a href=&quot;javascript:void(0)&quot; class=&quot;list-group-item disabled&quot;&gt;Cras justo odio &lt;/a&gt;
+                                                        &lt;a href=&quot;javascript:void(0)&quot; class=&quot;list-group-item&quot;&gt;Dapibus ac facilisis in&lt;/a&gt;
+                                                        &lt;a href=&quot;javascript:void(0)&quot; class=&quot;list-group-item&quot;&gt;Morbi leo risus&lt;/a&gt;
+                                                        &lt;a href=&quot;javascript:void(0)&quot; class=&quot;list-group-item&quot;&gt;Porta ac consectetur ac&lt;/a&gt;
+                                                        &lt;a href=&quot;javascript:void(0)&quot; class=&quot;list-group-item&quot;&gt;Vestibulum at eros&lt;/a&gt;
+                                                    &lt;/div&gt;
+                                              </code> 
+                                          </pre>
+                                        </div>
+                                        <div class="list-group">
+                                            <a href="javascript:void(0)" class="list-group-item disabled">Cras justo odio </a>
+                                            <a href="javascript:void(0)" class="list-group-item">Dapibus ac facilisis in</a>
+                                            <a href="javascript:void(0)" class="list-group-item">Morbi leo risus</a>
+                                            <a href="javascript:void(0)" class="list-group-item">Porta ac consectetur ac</a>
+                                            <a href="javascript:void(0)" class="list-group-item">Vestibulum at eros</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 mt-4">
+                                        <h4 class="card-title">Disabled items <a class="get-code" data-bs-toggle="collapse" href="#pgr6" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-bs-toggle="tooltip"></i></a></h4>
+                                        <div class="collapse mt-3 well" id="pgr6" aria-expanded="true">
+                                            <pre class="language-html scrollable">
+                                                <code>
+                                                    &lt;ul class=&quot;list-group&quot;&gt;
+                                                        &lt;li class=&quot;list-group-item list-group-item-success&quot;&gt;Dapibus ac facilisis in&lt;/li&gt;
+                                                        &lt;li class=&quot;list-group-item list-group-item-info&quot;&gt;Cras sit amet nibh libero&lt;/li&gt;
+                                                        &lt;li class=&quot;list-group-item list-group-item-warning&quot;&gt;Porta ac consectetur ac&lt;/li&gt;
+                                                        &lt;li class=&quot;list-group-item list-group-item-danger&quot;&gt;Vestibulum at eros&lt;/li&gt;
+                                                        &lt;li class=&quot;list-group-item list-group-item-default&quot;&gt;Vestibulum at eros&lt;/li&gt;
+                                                    &lt;/ul&gt;
+                                              </code> 
+                                          </pre>
+                                        </div>
+                                        <ul class="list-group">
+                                            <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
+                                            <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
+                                            <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>
+                                            <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+                                            <li class="list-group-item list-group-item-default">Vestibulum at eros</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                                <!-- .row -->
+                                <div class="row">
+                                    <div class="col-md-8 mt-4">
+                                        <h4 class="card-title">Media object</h4>
+                                         <ul class="list-unstyled">
+                                            <li class="media">
+                                                <img class="d-flex me-3" src="assets/images/users/1.jpg" width="60" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="mt-0 mb-1">List-based media object</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                </div>
+                                            </li>
+                                            <li class="media my-4">
+                                                <img class="d-flex me-3" src="assets/images/users/2.jpg" width="60" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="mt-0 mb-1">List-based media object</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                </div>
+                                            </li>
+                                            <li class="media overflow-auto">
+                                                <img class="d-flex me-3" src="assets/images/users/3.jpg" width="60" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="mt-0 mb-1">List-based media object</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                    <div class="media mt-3">
+                                                        <a class="d-flex pe-3" href="javascript:void(0)">
+                                                            <img src="assets/images/users/4.jpg" width="60" height="60" alt="Generic placeholder image">
+                                                        </a>
+                                                        <div class="media-body">
+                                                            <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                        </div>
                                                     </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 mt-4">
+                                        <h4 class="card-title">Custom content</h4>
+                                        <div class="list-group">
+                                            <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start active">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h5 class="mb-1 text-white">List group item heading</h5>
+                                                    <small>3 days ago</small>
+                                                </div>
+                                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                                <small>Donec id elit non mi porta.</small>
+                                            </a>
+                                            <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h5 class="mb-1">List group item heading</h5>
+                                                    <small class="text-muted">3 days ago</small>
+                                                </div>
+                                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                                <small class="text-muted">Donec id elit non mi porta.</small>
+                                            </a>
+                                            <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h5 class="mb-1">List group item heading</h5>
+                                                    <small class="text-muted">3 days ago</small>
+                                                </div>
+                                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                                <small class="text-muted">Donec id elit non mi porta.</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <pre class="language-html scrollable">
+                                            <code>
+                                                &lt;ul class=&quot;list-unstyled&quot;&gt;
+                                                    &lt;li class=&quot;media&quot;&gt;
+                                                        &lt;img class=&quot;d-flex me-3&quot; src=&quot;assets/images/users/1.jpg&quot; width=&quot;60&quot; alt=&quot;Generic placeholder image&quot;&gt;
+                                                        &lt;div class=&quot;media-body&quot;&gt;
+                                                            &lt;h5 class=&quot;mt-0 mb-1&quot;&gt;List-based media object&lt;/h5&gt; Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                        &lt;/div&gt;
+                                                    &lt;/li&gt;
+                                                    &lt;li class=&quot;media my-4&quot;&gt;
+                                                        &lt;img class=&quot;d-flex me-3&quot; src=&quot;assets/images/users/2.jpg&quot; width=&quot;60&quot; alt=&quot;Generic placeholder image&quot;&gt;
+                                                        &lt;div class=&quot;media-body&quot;&gt;
+                                                            &lt;h5 class=&quot;mt-0 mb-1&quot;&gt;List-based media object&lt;/h5&gt; Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                        &lt;/div&gt;
+                                                    &lt;/li&gt;
+                                                    &lt;li class=&quot;media&quot;&gt;
+                                                        &lt;img class=&quot;d-flex me-3&quot; src=&quot;assets/images/users/3.jpg&quot; width=&quot;60&quot; alt=&quot;Generic placeholder image&quot;&gt;
+                                                        &lt;div class=&quot;media-body&quot;&gt;
+                                                            &lt;h5 class=&quot;mt-0 mb-1&quot;&gt;List-based media object&lt;/h5&gt; Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                            &lt;div class=&quot;media mt-3&quot;&gt;
+                                                                &lt;a class=&quot;d-flex pe-3&quot; href=&quot;javascript:void(0)&quot;&gt;
+                                                                    &lt;img src=&quot;assets/images/users/4.jpg&quot; width=&quot;60&quot; height=&quot;60&quot; alt=&quot;Generic placeholder image&quot;&gt;
+                                                                &lt;/a&gt;
+                                                                &lt;div class=&quot;media-body&quot;&gt;
+                                                                    &lt;h5 class=&quot;mt-0&quot;&gt;Media heading&lt;/h5&gt; Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                                &lt;/div&gt;
+                                                            &lt;/div&gt;
+                                                        &lt;/div&gt;
+                                                    &lt;/li&gt;
+                                                &lt;/ul&gt;
+                                            </code>
+                                        </pre>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <pre class="language-html scrollable">
+                                            <code>
+                                                &lt;div class=&quot;list-group&quot;&gt;
+                                                    &lt;a href=&quot;javascript:void(0)&quot; class=&quot;list-group-item list-group-item-action flex-column align-items-start active&quot;&gt;
+                                                        &lt;div class=&quot;d-flex w-100 justify-content-between&quot;&gt;
+                                                            &lt;h5 class=&quot;mb-1 text-white&quot;&gt;List group item heading&lt;/h5&gt;
+                                                            &lt;small&gt;3 days ago&lt;/small&gt;
+                                                        &lt;/div&gt;
+                                                        &lt;p class=&quot;mb-1&quot;&gt;Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.&lt;/p&gt;
+                                                        &lt;small&gt;Donec id elit non mi porta.&lt;/small&gt;
+                                                    &lt;/a&gt;
+                                                    &lt;a href=&quot;javascript:void(0)&quot; class=&quot;list-group-item list-group-item-action flex-column align-items-start&quot;&gt;
+                                                        &lt;div class=&quot;d-flex w-100 justify-content-between&quot;&gt;
+                                                            &lt;h5 class=&quot;mb-1&quot;&gt;List group item heading&lt;/h5&gt;
+                                                            &lt;small class=&quot;text-muted&quot;&gt;3 days ago&lt;/small&gt;
+                                                        &lt;/div&gt;
+                                                        &lt;p class=&quot;mb-1&quot;&gt;Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.&lt;/p&gt;
+                                                        &lt;small class=&quot;text-muted&quot;&gt;Donec id elit non mi porta.&lt;/small&gt;
+                                                    &lt;/a&gt;
+                                                    &lt;a href=&quot;javascript:void(0)&quot; class=&quot;list-group-item list-group-item-action flex-column align-items-start&quot;&gt;
+                                                        &lt;div class=&quot;d-flex w-100 justify-content-between&quot;&gt;
+                                                            &lt;h5 class=&quot;mb-1&quot;&gt;List group item heading&lt;/h5&gt;
+                                                            &lt;small class=&quot;text-muted&quot;&gt;3 days ago&lt;/small&gt;
+                                                        &lt;/div&gt;
+                                                        &lt;p class=&quot;mb-1&quot;&gt;Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.&lt;/p&gt;
+                                                        &lt;small class=&quot;text-muted&quot;&gt;Donec id elit non mi porta.&lt;/small&gt;
+                                                    &lt;/a&gt;
+                                                &lt;/div&gt;
+                                            </code>
+                                        </pre>
+                                    </div>
+                                    <div class="col-md-8 mt-4">
+                                        <h4 class="card-title">JavaScript behavior</h4>
+                                        <div class="row">
+                                          <div class="col-4">
+                                            <div class="list-group" id="list-tab" role="tablist">
+                                              <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                                              <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                                              <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                                            </div>
+                                          </div>
+                                          <div class="col-8">
+                                            <div class="tab-content" id="nav-tabContent">
+                                              <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                                                  Irure enim occaecat labore sit qui aliquip reprehenderit amet velit. Deserunt ullamco ex elit nostrud ut dolore nisi officia magna sit occaecat laboris sunt dolor. 
+                                              </div>
+                                              <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                                                  Irure enim occaecat labore sit qui aliquip reprehenderit amet velit. Deserunt ullamco ex elit nostrud ut dolore nisi officia magna sit occaecat laboris sunt dolor. 
+                                              </div>
+                                              <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                                                  Irure enim occaecat labore sit qui aliquip reprehenderit amet velit. Deserunt ullamco ex elit nostrud ut dolore nisi officia magna sit occaecat laboris sunt dolor. 
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-4">
+                                        <pre class="language-html scrollable pre">
+                                            <code>
+                                                &lt;div class=&quot;row&quot;&gt;
+                                                  &lt;div class=&quot;col-4&quot;&gt;
+                                                    &lt;div class=&quot;list-group&quot; id=&quot;list-tab&quot; role=&quot;tablist&quot;&gt;
+                                                      &lt;a class=&quot;list-group-item list-group-item-action active&quot; id=&quot;list-home-list&quot; data-bs-toggle=&quot;list&quot; href=&quot;#list-home&quot; role=&quot;tab&quot; aria-controls=&quot;home&quot;&gt;Home&lt;/a&gt;
+                                                      &lt;a class=&quot;list-group-item list-group-item-action&quot; id=&quot;list-profile-list&quot; data-bs-toggle=&quot;list&quot; href=&quot;#list-profile&quot; role=&quot;tab&quot; aria-controls=&quot;profile&quot;&gt;Profile&lt;/a&gt;
+                                                      &lt;a class=&quot;list-group-item list-group-item-action&quot; id=&quot;list-messages-list&quot; data-bs-toggle=&quot;list&quot; href=&quot;#list-messages&quot; role=&quot;tab&quot; aria-controls=&quot;messages&quot;&gt;Messages&lt;/a&gt;
+                                                    &lt;/div&gt;
+                                                  &lt;/div&gt;
+                                                  &lt;div class=&quot;col-8&quot;&gt;
+                                                    &lt;div class=&quot;tab-content&quot; id=&quot;nav-tabContent&quot;&gt;
+                                                      &lt;div class=&quot;tab-pane fade show active&quot; id=&quot;list-home&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;list-home-list&quot;&gt;
+                                                          Irure enim occaecat labore sit qui aliquip reprehenderit amet velit. Deserunt ullamco ex elit nostrud ut dolore nisi officia magna sit occaecat laboris sunt dolor. 
+                                                      &lt;/div&gt;
+                                                      &lt;div class=&quot;tab-pane fade&quot; id=&quot;list-profile&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;list-profile-list&quot;&gt;
+                                                          Irure enim occaecat labore sit qui aliquip reprehenderit amet velit. Deserunt ullamco ex elit nostrud ut dolore nisi officia magna sit occaecat laboris sunt dolor. 
+                                                      &lt;/div&gt;
+                                                      &lt;div class=&quot;tab-pane fade&quot; id=&quot;list-messages&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;list-messages-list&quot;&gt;
+                                                          Irure enim occaecat labore sit qui aliquip reprehenderit amet velit. Deserunt ullamco ex elit nostrud ut dolore nisi officia magna sit occaecat laboris sunt dolor. 
+                                                      &lt;/div&gt;
+                                                    &lt;/div&gt;
+                                                  &lt;/div&gt;
+                                                &lt;/div&gt;
+                                            </code>
+                                        </pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Media heading</h5>
+                                        <div class="media">
+                                            <img class="me-3 img-fluid w-25" src="assets/images/big/img1.jpg" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Nesting</h5>
+                                        <div class="media">
+                                            <img class="me-3 w-25" src="assets/images/big/img1.jpg" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                <div class="media mt-3">
+                                                    <a class="pe-3 w-25" href="#">
+                                                <img src="assets/images/big/img1.jpg" class="w-100" alt="Generic placeholder image">
+                                            </a>
+                                                    <div class="media-body">
+                                                        <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
                                                     </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Alignment</h5>
+                                        <div class="media">
+                                            <img class="align-self-start w-25 me-3" src="assets/images/big/img1.jpg" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="mt-0">Top-aligned media</h5>
+                                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                                <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Center-aligned media</h5>
+                                        <div class="media">
+                                            <img class="align-self-center w-25 me-3" src="assets/images/big/img1.jpg" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="mt-0">Center-aligned media</h5>
+                                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                                <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Bottom-aligned media</h5>
+                                        <div class="media">
+                                            <img class="align-self-end me-3 w-25" src="assets/images/big/img1.jpg" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h5 class="mt-0">Bottom-aligned media</h5>
+                                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                                <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Order</h5>
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <h5 class="mt-0 mb-1">Media object</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                            </div>
+                                            <img class="ms-3 w-25" src="assets/images/big/img1.jpg" alt="Generic placeholder image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Media list</h5>
+                                        <ul class="list-unstyled">
+                                            <li class="media">
+                                                <img class="me-3 w-25" src="assets/images/big/img1.jpg" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="mt-0 mb-1">List-based media object</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                </div>
+                                            </li>
+                                            <li class="media my-4">
+                                                <img class="me-3 w-25" src="assets/images/big/img1.jpg" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="mt-0 mb-1">List-based media object</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <img class="me-3 w-25" src="assets/images/big/img1.jpg" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="mt-0 mb-1">List-based media object</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -790,6 +1137,7 @@ $data = $req->fetch();
     <script src="assets/node_modules/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="assets/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/node_modules/prism/prism.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="dist/js/perfect-scrollbar.jquery.min.js"></script>
     <!--Wave Effects -->
@@ -797,15 +1145,11 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=css&amp;skin=default"></script>
 </body>
 
 </html>

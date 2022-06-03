@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +11,6 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -588,13 +571,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Scroll</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Scroll</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,40 +590,90 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="">
+                            <div class="card-body">
+                                <h4 class="card-title">Only Content Scroll</h4>
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
-                                                </div>
+                                    <div class="col-lg-4 col-md-3"><img src="assets/images/big/img1.jpg" class="img-fluid" /></div>
+                                    <div class="col-lg-8 col-md-9" id="slimtest1" style="height: 250px;">
+                                        <div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus, felis interdum condimentum consectetur, nisl libero elementum eros, vehicula congue lacus eros non diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                            <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                            <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus, felis interdum condimentum consectetur, nisl libero elementum eros, vehicula congue lacus eros non diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                            <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                            <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                            <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                            <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Both image and content Scroll</h4>
+                                <div class="row">
+                                    <div class="col-lg-12" id="slimtest2" style="height: 250px;">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-3"><img src="assets/images/big/img2.jpg" class="img-fluid" /></div>
+                                            <div class="col-lg-8 col-md-9">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus, felis interdum condimentum consectetur, nisl libero elementum eros, vehicula congue lacus eros non diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                                <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                                <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus, felis interdum condimentum consectetur, nisl libero elementum eros, vehicula congue lacus eros non diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                                <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                                <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                                <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                                <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Scroll on Left</h4>
+                                <div class="row">
+                                    <div class="col-lg-12" id="slimtest3" style="height: 250px;">
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-9">
+                                                <div class="p-l-20">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus, felis interdum condimentum consectetur, nisl libero elementum eros, vehicula congue lacus eros non diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                                    <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                                    <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus, felis interdum condimentum consectetur, nisl libero elementum eros, vehicula congue lacus eros non diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                                    <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                                    <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                                    <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                                    <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-3"><img src="assets/images/big/img4.jpg" class="img-fluid" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Custom Scroll Color</h4>
+                                <div class="row">
+                                    <div class="col-lg-12" id="slimtest4" style="height: 250px;">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-3"><img src="assets/images/big/img2.jpg" class="img-fluid" /></div>
+                                            <div class="col-lg-8 col-md-9">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus, felis interdum condimentum consectetur, nisl libero elementum eros, vehicula congue lacus eros non diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                                <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                                <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus, felis interdum condimentum consectetur, nisl libero elementum eros, vehicula congue lacus eros non diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                                <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                                <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                                <p>Vivamus mauris lorem, lacinia id tempus non, imperdiet et leo. Cras sit amet erat sit amet lacus egestas placerat. </p>
+                                                <p>Aenean ultricies ultrices mauris ac congue. In vel tortor vel velit tristique tempus ac id nisi. Proin quis lorem velit. Nunc dui dui, blandit a ullamcorper vitae, congue fringilla lectus. Aliquam ultricies malesuada feugiat. Vestibulum placerat turpis et eros lobortis vel semper sapien pulvinar.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -648,60 +681,6 @@ $data = $req->fetch();
                         </div>
                     </div>
                 </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -797,15 +776,13 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
+    <script type="text/javascript">
+    $('#slimtest1, #slimtest2, #slimtest3, #slimtest4').perfectScrollbar();
+    </script>
 </body>
 
 </html>

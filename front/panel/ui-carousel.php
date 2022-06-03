@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +11,7 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
+    <link href="assets/node_modules/prism/prism.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -588,13 +572,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Carousel</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Carousel</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -606,102 +590,280 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                <!-- row -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-lg-6">
                         <div class="card">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="card-body">
+                                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item active"> <img class="img-fluid" src="assets/images/big/img1.jpg" alt="First slide"> </div>
+                                        <div class="carousel-item"> <img class="img-fluid" src="assets/images/big/img2.jpg" alt="Second slide"> </div>
+                                        <div class="carousel-item"> <img class="img-fluid" src="assets/images/big/img3.jpg" alt="Third slide"> </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
-                                        </div>
+                                </div>
+                                <div class="highlight">
+                                    <pre class="language-html scrollable">
+                                        <code>
+                                            &lt;div id=&quot;carouselExampleSlidesOnly&quot; class=&quot;carousel slide&quot; data-bs-ride=&quot;carousel&quot;&gt;
+                                    &lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+                                        &lt;div class=&quot;carousel-item active&quot;&gt; &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img1.jpg&quot; alt=&quot;First slide&quot;&gt; &lt;/div&gt;
+                                        &lt;div class=&quot;carousel-item&quot;&gt; &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img2.jpg&quot; alt=&quot;Second slide&quot;&gt; &lt;/div&gt;
+                                        &lt;div class=&quot;carousel-item&quot;&gt; &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img3.jpg&quot; alt=&quot;Third slide&quot;&gt; &lt;/div&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item active"> <img class="img-fluid" src="assets/images/big/img4.jpg" alt="First slide"> </div>
+                                        <div class="carousel-item"> <img class="img-fluid" src="assets/images/big/img5.jpg" alt="Second slide"> </div>
+                                        <div class="carousel-item"> <img class="img-fluid" src="assets/images/big/img6.jpg" alt="Third slide"> </div>
                                     </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next" data-bs-target="#carouselExampleIndicators"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+                                </div>
+                                <div class="highlight">
+                                    <pre class="language-html scrollable">
+                                        <code>
+                                            &lt;div id=&quot;carouselExampleIndicators&quot; class=&quot;carousel slide&quot; data-bs-ride=&quot;carousel&quot;&gt;
+                                    &lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+                                        &lt;div class=&quot;carousel-item active&quot;&gt; &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img4.jpg&quot; alt=&quot;First slide&quot;&gt; &lt;/div&gt;
+                                        &lt;div class=&quot;carousel-item&quot;&gt; &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img5.jpg&quot; alt=&quot;Second slide&quot;&gt; &lt;/div&gt;
+                                        &lt;div class=&quot;carousel-item&quot;&gt; &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img6.jpg&quot; alt=&quot;Third slide&quot;&gt; &lt;/div&gt;
+                                    &lt;/div&gt;
+                                    &lt;a class=&quot;carousel-control-prev&quot; href=&quot;#carouselExampleIndicators&quot; role=&quot;button&quot; data-bs-slide=&quot;prev&quot; data-bs-target=&quot;#carouselExampleIndicators&quot;&gt; &lt;span class=&quot;carousel-control-prev-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; &lt;span class=&quot;sr-only&quot;&gt;Previous&lt;/span&gt; &lt;/a&gt;
+                                    &lt;a class=&quot;carousel-control-next&quot; href=&quot;#carouselExampleIndicators&quot; role=&quot;button&quot; data-bs-slide=&quot;next&quot; data-bs-target=&quot;#carouselExampleIndicators&quot;&gt; &lt;span class=&quot;carousel-control-next-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; &lt;span class=&quot;sr-only&quot;&gt;Next&lt;/span&gt; &lt;/a&gt;
+                                &lt;/div&gt;
+                                        </code>
+                                    </pre>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
+                <!-- End row -->
+                <!-- row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h4 class="card-title">With indicators</h4>
+                                        <h6 class="card-subtitle">You can also add the indicators to the carousel, alongside the controls, too.</h6>
+                                        <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                <li data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active"></li>
+                                                <li data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1"></li>
+                                                <li data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2"></li>
+                                            </ol>
+                                            <div class="carousel-inner" role="listbox">
+                                                <div class="carousel-item active">
+                                                    <img class="img-fluid" src="assets/images/big/img3.jpg" alt="First slide">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img class="img-fluid" src="assets/images/big/img4.jpg" alt="Second slide">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img class="img-fluid" src="assets/images/big/img5.jpg" alt="Third slide">
+                                                </div>
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators2">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-bs-slide="next" data-bs-target="#carouselExampleIndicators2">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
                                         </div>
                                     </div>
-                                </form>
+                                    <div class="col-lg-6">
+                                        <h4 class="card-title">With captions</h4>
+                                        <h6 class="card-subtitle">Add captions to your slides easily with the <code>.carousel-caption</code></h6>
+                                        <div id="carouselExampleIndicators3" class="carousel slide" data-bs-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                <li data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="0" class="active"></li>
+                                                <li data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="1"></li>
+                                                <li data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="2"></li>
+                                            </ol>
+                                            <div class="carousel-inner" role="listbox">
+                                                <div class="carousel-item active">
+                                                    <img class="img-fluid" src="assets/images/big/img6.jpg" alt="First slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <h3 class="text-white">First title goes here</h3>
+                                                        <p>this is the subcontent you can use this</p>
+                                                    </div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img class="img-fluid" src="assets/images/big/img3.jpg" alt="Second slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <h3 class="text-white">Second title goes here</h3>
+                                                        <p>this is the subcontent you can use this</p>
+                                                    </div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img class="img-fluid" src="assets/images/big/img4.jpg" alt="Third slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <h3 class="text-white">Third title goes here</h3>
+                                                        <p>this is the subcontent you can use this</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators3">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button" data-bs-slide="next" data-bs-target="#carouselExampleIndicators3">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <pre class="language-html scrollable">
+                                            <code>
+                                                &lt;div id=&quot;carouselExampleIndicators2&quot; class=&quot;carousel slide&quot; data-bs-ride=&quot;carousel&quot;&gt;
+                                            &lt;ol class=&quot;carousel-indicators&quot;&gt;
+                                                &lt;li data-bs-target=&quot;#carouselExampleIndicators2&quot; data-bs-slide-to=&quot;0&quot; class=&quot;active&quot;&gt;&lt;/li&gt;
+                                                &lt;li data-bs-target=&quot;#carouselExampleIndicators2&quot; data-bs-slide-to=&quot;1&quot;&gt;&lt;/li&gt;
+                                                &lt;li data-bs-target=&quot;#carouselExampleIndicators2&quot; data-bs-slide-to=&quot;2&quot;&gt;&lt;/li&gt;
+                                            &lt;/ol&gt;
+                                            &lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+                                                &lt;div class=&quot;carousel-item active&quot;&gt;
+                                                    &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img3.jpg&quot; alt=&quot;First slide&quot;&gt;
+                                                &lt;/div&gt;
+                                                &lt;div class=&quot;carousel-item&quot;&gt;
+                                                    &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img4.jpg&quot; alt=&quot;Second slide&quot;&gt;
+                                                &lt;/div&gt;
+                                                &lt;div class=&quot;carousel-item&quot;&gt;
+                                                    &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img5.jpg&quot; alt=&quot;Third slide&quot;&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                            &lt;a class=&quot;carousel-control-prev&quot; href=&quot;#carouselExampleIndicators2&quot; role=&quot;button&quot; data-bs-slide=&quot;prev&quot; data-bs-target=&quot;#carouselExampleIndicators2&quot;&gt;
+                                                &lt;span class=&quot;carousel-control-prev-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                                                &lt;span class=&quot;sr-only&quot;&gt;Previous&lt;/span&gt;
+                                            &lt;/a&gt;
+                                            &lt;a class=&quot;carousel-control-next&quot; href=&quot;#carouselExampleIndicators2&quot; role=&quot;button&quot; data-bs-slide=&quot;next&quot; data-bs-target=&quot;#carouselExampleIndicators2&quot;&gt;
+                                                &lt;span class=&quot;carousel-control-next-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                                                &lt;span class=&quot;sr-only&quot;&gt;Next&lt;/span&gt;
+                                            &lt;/a&gt;
+                                        &lt;/div&gt;
+                                            </code>
+                                        </pre>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <pre class="language-html scrollable">
+                                            <code>
+                                                &lt;div id=&quot;carouselExampleIndicators3&quot; class=&quot;carousel slide&quot; data-bs-ride=&quot;carousel&quot;&gt;
+                                            &lt;ol class=&quot;carousel-indicators&quot;&gt;
+                                                &lt;li data-bs-target=&quot;#carouselExampleIndicators3&quot; data-bs-slide-to=&quot;0&quot; class=&quot;active&quot;&gt;&lt;/li&gt;
+                                                &lt;li data-bs-target=&quot;#carouselExampleIndicators3&quot; data-bs-slide-to=&quot;1&quot;&gt;&lt;/li&gt;
+                                                &lt;li data-bs-target=&quot;#carouselExampleIndicators3&quot; data-bs-slide-to=&quot;2&quot;&gt;&lt;/li&gt;
+                                            &lt;/ol&gt;
+                                            &lt;div class=&quot;carousel-inner&quot; role=&quot;listbox&quot;&gt;
+                                                &lt;div class=&quot;carousel-item active&quot;&gt;
+                                                    &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img6.jpg&quot; alt=&quot;First slide&quot;&gt;
+                                                    &lt;div class=&quot;carousel-caption d-none d-md-block&quot;&gt;
+                                                        &lt;h3 class=&quot;text-white&quot;&gt;First title goes here&lt;/h3&gt;
+                                                        &lt;p&gt;this is the subcontent you can use this&lt;/p&gt;
+                                                    &lt;/div&gt;
+                                                &lt;/div&gt;
+                                                &lt;div class=&quot;carousel-item&quot;&gt;
+                                                    &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img3.jpg&quot; alt=&quot;Second slide&quot;&gt;
+                                                    &lt;div class=&quot;carousel-caption d-none d-md-block&quot;&gt;
+                                                        &lt;h3 class=&quot;text-white&quot;&gt;Second title goes here&lt;/h3&gt;
+                                                        &lt;p&gt;this is the subcontent you can use this&lt;/p&gt;
+                                                    &lt;/div&gt;
+                                                &lt;/div&gt;
+                                                &lt;div class=&quot;carousel-item&quot;&gt;
+                                                    &lt;img class=&quot;img-fluid&quot; src=&quot;assets/images/big/img4.jpg&quot; alt=&quot;Third slide&quot;&gt;
+                                                    &lt;div class=&quot;carousel-caption d-none d-md-block&quot;&gt;
+                                                        &lt;h3 class=&quot;text-white&quot;&gt;Third title goes here&lt;/h3&gt;
+                                                        &lt;p&gt;this is the subcontent you can use this&lt;/p&gt;
+                                                    &lt;/div&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                            &lt;a class=&quot;carousel-control-prev&quot; href=&quot;#carouselExampleIndicators3&quot; role=&quot;button&quot; data-bs-slide=&quot;prev&quot; data-bs-target=&quot;#carouselExampleIndicators3&quot;&gt;
+                                                &lt;span class=&quot;carousel-control-prev-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                                                &lt;span class=&quot;sr-only&quot;&gt;Previous&lt;/span&gt;
+                                            &lt;/a&gt;
+                                            &lt;a class=&quot;carousel-control-next&quot; href=&quot;#carouselExampleIndicators3&quot; role=&quot;button&quot; data-bs-slide=&quot;next&quot; data-bs-target=&quot;#carouselExampleIndicators3&quot;&gt;
+                                                &lt;span class=&quot;carousel-control-next-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                                                &lt;span class=&quot;sr-only&quot;&gt;Next&lt;/span&gt;
+                                            &lt;/a&gt;
+                                        &lt;/div&gt;
+                                            </code>
+                                        </pre>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">With Individual Interval</h4>
+                                <h6 class="card-subtitle">Add data-bs-interval="" to a .carousel-item to change the amount of time to delay between automatically cycling to the next item.</h6>
+                                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                      <div class="carousel-item active" data-bs-interval="10000">
+                                        <img src="assets/images/img3.jpg" class="d-block w-100 img-fluid" alt="First slide">
+                                      </div>
+                                      <div class="carousel-item" data-bs-interval="2000">
+                                        <img src="assets/images/big/img4.jpg" class="d-block w-100 img-fluid" alt="Second slide">
+                                      </div>
+                                      <div class="carousel-item">
+                                        <img src="assets/images/big/img2.jpg" class="d-block w-100 img-fluid" alt="Third slide">
+                                      </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Next</span>
+                                    </button>
+                                  </div>
+                                <pre class="language-html scrollable">
+                                    <code>
+                                        &lt;div id=&quot;carouselExampleInterval&quot; class=&quot;carousel slide&quot; data-bs-ride=&quot;carousel&quot;&gt;
+                                    &lt;div class=&quot;carousel-inner&quot;&gt;
+                                      &lt;div class=&quot;carousel-item active&quot; data-bs-interval=&quot;10000&quot;&gt;
+                                        &lt;img src=&quot;assets/images/img3.jpg&quot; class=&quot;d-block w-100 img-fluid&quot; alt=&quot;First slide&quot;&gt;
+                                      &lt;/div&gt;
+                                      &lt;div class=&quot;carousel-item&quot; data-bs-interval=&quot;2000&quot;&gt;
+                                        &lt;img src=&quot;assets/images/big/img4.jpg&quot; class=&quot;d-block w-100 img-fluid&quot; alt=&quot;Second slide&quot;&gt;
+                                      &lt;/div&gt;
+                                      &lt;div class=&quot;carousel-item&quot;&gt;
+                                        &lt;img src=&quot;assets/images/big/img2.jpg&quot; class=&quot;d-block w-100 img-fluid&quot; alt=&quot;Third slide&quot;&gt;
+                                      &lt;/div&gt;
+                                    &lt;/div&gt;
+                                    &lt;button class=&quot;carousel-control-prev&quot; type=&quot;button&quot; data-bs-target=&quot;#carouselExampleInterval&quot; data-bs-slide=&quot;prev&quot;&gt;
+                                      &lt;span class=&quot;carousel-control-prev-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                                      &lt;span class=&quot;visually-hidden&quot;&gt;Previous&lt;/span&gt;
+                                    &lt;/button&gt;
+                                    &lt;button class=&quot;carousel-control-next&quot; type=&quot;button&quot; data-bs-target=&quot;#carouselExampleInterval&quot; data-bs-slide=&quot;next&quot;&gt;
+                                      &lt;span class=&quot;carousel-control-next-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+                                      &lt;span class=&quot;visually-hidden&quot;&gt;Next&lt;/span&gt;
+                                    &lt;/button&gt;
+                                  &lt;/div&gt;
+                                    </code>
+                                </pre>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- END MODAL -->
+                <!-- End row -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -797,15 +959,11 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
+    <script src="assets/node_modules/prism/prism.js"></script>
 </body>
 
 </html>

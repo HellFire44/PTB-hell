@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +11,10 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/node_modules/prism/prism.css">
+    <!-- page css -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -588,13 +573,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Cards</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Cards</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -606,102 +591,531 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                <!-- Row -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
+                        <h4 class="d-inline">Card with Image <a href="#code1" data-bs-toggle="collapse"><i class="fa fa-code" data-bs-toggle="tooltip" title="Get code"></i></a></h4>
+                        <p class="text-muted m-t-0">For the code click on above code icon</p>
+                        <div id="code1" class="collapse">
+                            <div class="highlight">
+                                <pre class="language-html scrollable">
+    <code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span> <span class="na">style=</span><span class="s">"width: 20rem;"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;img</span> <span class="na">class=</span><span class="s">"card-img-top"</span> <span class="na">src=</span><span class="s">"..."</span> <span class="na">alt=</span><span class="s">"Card image cap"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Card title<span class="nt">&lt;/h4&gt;</span>
+        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"card-text"</span><span class="nt">&gt;</span>Some quick example text to build on the card title and make up the bulk of the card's content.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>Go somewhere<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span></code>
+</pre>
+                            </div>
+                        </div>
+                        <!-- Row -->
+                        <div class="row">
+                            <!-- column -->
+                            <div class="col-lg-3 col-md-6">
+                                <!-- Card -->
+                                <div class="card">
+                                    <img class="card-img-top img-responsive" src="assets/images/big/img1.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                                    </div>
+                                </div>
+                                <!-- Card -->
+                            </div>
+                            <!-- column -->
+                            <!-- column -->
+                            <div class="col-lg-3 col-md-6">
+                                <!-- Card -->
+                                <div class="card">
+                                    <img class="card-img-top img-responsive" src="assets/images/big/img2.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                                    </div>
+                                </div>
+                                <!-- Card -->
+                            </div>
+                            <!-- column -->
+                            <!-- column -->
+                            <div class="col-lg-3 col-md-6">
+                                <!-- Card -->
+                                <div class="card">
+                                    <img class="card-img-top img-responsive" src="assets/images/big/img3.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                                    </div>
+                                </div>
+                                <!-- Card -->
+                            </div>
+                            <!-- column -->
+                            <!-- column -->
+                            <div class="col-lg-3 col-md-6 img-responsive">
+                                <!-- Card -->
+                                <div class="card">
+                                    <img class="card-img-top img-responsive" src="assets/images/big/img4.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                                    </div>
+                                </div>
+                                <!-- Card -->
+                            </div>
+                            <!-- column -->
+                        </div>
+                        <!-- Row -->
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Content types</h4>
+                        <p class="text-muted m-t-0">The building block of a card is the <code>.card</code> <code>.card-body</code> Use it whenever you need a padded section within a card.</p>
                         <div class="card">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
-                                        </div>
-                                    </div>
+                            <div class="card-body collapse show">
+                                <h4 class="card-title">Special title treatment</h4>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Titles, text, and links</h4>
+                        <p class="text-muted m-t-0">Card titles are used by adding <code>.card-title</code> &amp; <code>.card-subtitle</code> for subtitle of card.</p>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="javascript:void(0)" class="card-link">Card link</a>
+                                <a href="javascript:void(0)" class="card-link">Another link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Header and footer</h4>
+                        <p class="text-muted m-t-0 font-12">Add an optional header and/or footer within a card. <code class="btn btn-sm" href="#code2" data-bs-toggle="collapse">HTML <i class="fa fa-code"></i></code></p>
+                        <div id="code2" class="collapse highlight">
+                            <pre class="prettyprint"><code class="language-html" data-lang="html">
+                            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+                              <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>
+                                Featured
+                              <span class="nt">&lt;/div&gt;</span>
+                              <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Special title treatment<span class="nt">&lt;/h4&gt;</span>
+                                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"card-text"</span><span class="nt">&gt;</span>With supporting text below as a natural lead-in to additional content.<span class="nt">&lt;/p&gt;</span>
+                                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>Go somewhere<span class="nt">&lt;/a&gt;</span>
+                              <span class="nt">&lt;/div&gt;</span>
+                            <span class="nt">&lt;/div&gt;</span></code>
+                            </pre>
+                        </div>
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                Featured
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Special title treatment</h4>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                            </div>
+                        </div>
+                        <!-- Card -->
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Header and footer</h4>
+                        <p class="text-muted m-t-0 font-12">Add an optional header and/or footer within a card. <code class="btn btn-sm" href="#code3" data-bs-toggle="collapse">HTML <i class="fa fa-code"></i></code></p>
+                        <div id="code3" class="collapse highlight">
+                            <pre><code class="language-html" data-lang="html">
+                            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card text-center"</span><span class="nt">&gt;</span>
+                              <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-header"</span><span class="nt">&gt;</span>
+                                Featured
+                              <span class="nt">&lt;/div&gt;</span>
+                              <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">"card-title"</span><span class="nt">&gt;</span>Special title treatment<span class="nt">&lt;/h4&gt;</span>
+                                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"card-text"</span><span class="nt">&gt;</span>With supporting text below as a natural lead-in to additional content.<span class="nt">&lt;/p&gt;</span>
+                                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>Go somewhere<span class="nt">&lt;/a&gt;</span>
+                              <span class="nt">&lt;/div&gt;</span>
+                              <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-footer text-muted"</span><span class="nt">&gt;</span>
+                                2 days ago
+                              <span class="nt">&lt;/div&gt;</span>
+                            <span class="nt">&lt;/div&gt;</span></code></pre>
+                        </div>
+                        <!-- Card -->
+                        <div class="card text-center">
+                            <div class="card-header">
+                                Featured
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Special title treatment</h4>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-info">Go somewhere</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                2 days ago
+                            </div>
+                        </div>
+                        <!-- Card -->
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Size Using grid markup</h4>
+                        <p class="text-muted m-t-0 font-12">Using the grid, wrap cards in columns and rows as needed.<code>.col-1 to .col-12</code></p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-success text-white">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Text alignment</h4>
+                        <p class="text-muted m-t-0 font-12">You can quickly change the text alignment<code>.text-center .text-end</code>.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Special title treatment</h4>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-info">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h4 class="card-title">Special title treatment</h4>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-end">
+                            <div class="card-body">
+                                <h4 class="card-title">Special title treatment</h4>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Using utilities</h4>
+                        <p class="text-muted m-t-0 font-12">Using the utility, you can give direct width class to card like<code>.w-25, w-50, w-75, w-100</code></p>
+                        <div class="card w-75">
+                            <div class="card-body">
+                                <h3 class="card-title">This card has width of 75%</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                            </div>
+                        </div>
+                        <div class="card w-50">
+                            <div class="card-body">
+                                <h3 class="card-title">This card has width of 50%</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Size Using grid markup</h4>
+                        <p class="text-muted m-t-0 font-12">Using the grid, wrap cards in columns and rows as needed.<code>.col-1 to .col-12</code></p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="javascript:void(0)">Active</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0)">Link</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link disabled" href="javascript:void(0)">Disabled</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Special title treatment</h4>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <ul class="nav nav-pills card-header-pills">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="javascript:void(0)">Active</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0)">Link</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link disabled" href="javascript:void(0)">Disabled</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Special title treatment</h4>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-info">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Card styles</h4>
+                        <p class="text-muted m-t-0 font-12">Cards include various options for customizing their backgrounds, borders, and color.<code>.card-primary info, warning, danger</code></p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-white bg-dark">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-white bg-info">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-white bg-primary">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-white bg-danger">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-white bg-warning">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card text-white bg-success">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Card styles</h4>
+                        <p class="text-muted m-t-0 font-12">Cards include various options for customizing their backgrounds, borders, and color.<code>.card-primary info, warning, danger</code></p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-dark">
+                            <div class="card-header bg-dark">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-primary text-white">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-info">
+                            <div class="card-header bg-info">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-primary">
+                            <div class="card-header bg-primary">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-danger">
+                            <div class="card-header bg-danger">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-warning">
+                            <div class="card-header bg-warning">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-success">
+                            <div class="card-header bg-success">
+                                <h4 class="m-b-0 text-white">Card Title</h4></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Special title treatment</h3>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="javascript:void(0)" class="btn btn-dark">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Row -->
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-12 m-t-30">
+                        <h4 class="m-b-0">Card Groups</h4>
+                        <p class="text-muted m-t-0 font-12">Use card groups to render cards as a single, attached element with equal width and height columns.</p>
+                        <div class="card-group">
+                            <div class="card">
+                                <img class="card-img-top img-responsive" src="assets/images/big/img1.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img class="card-img-top img-responsive" src="assets/images/big/img2.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img class="card-img-top img-responsive" src="assets/images/big/img3.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
+                <!-- End Row -->
+                <h4 class="m-t-40">Card With action</h4>
+                <p class="text-muted m-t-0 font-12">With action elements.</p>
+                <div class="card">
+                    <div class="card-header">
+                        Title
+                        <div class="card-actions">
+                            <a class="" data-action="collapse"><i class="ti-minus"></i></a>
+                            <a class="btn-minimize" data-action="expand"><i class="mdi mdi-arrow-expand"></i></a>
+                            <a class="btn-close" data-action="close"><i class="ti-close"></i></a>
                         </div>
                     </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
+                    <div class="card-body collapse show">
+                        <h4 class="card-title">Special title treatment</h4>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                     </div>
                 </div>
-                <!-- END MODAL -->
+                <!-- Row -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -790,6 +1204,7 @@ $data = $req->fetch();
     <script src="assets/node_modules/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="assets/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/node_modules/prism/prism.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="dist/js/perfect-scrollbar.jquery.min.js"></script>
     <!--Wave Effects -->
@@ -797,15 +1212,10 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
 </body>
 
 </html>

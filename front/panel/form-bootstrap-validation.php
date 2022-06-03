@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +11,6 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -229,7 +212,7 @@ $data = $req->fetch();
                                          <!-- Accordian -->
                                         <div class="accordion" id="accordionExample">
                                             <div class="card m-b-0">
-                                                <div class="card-header p-0" id="headingOne">
+                                                <div class="card-header bg-white p-0" id="headingOne">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                             Collapsible Group Item #1
@@ -244,7 +227,7 @@ $data = $req->fetch();
                                                 </div>
                                             </div>
                                             <div class="card m-b-0">
-                                                <div class="card-header p-0" id="headingTwo">
+                                                <div class="card-header bg-white p-0" id="headingTwo">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
                                                             aria-controls="collapseTwo">
@@ -259,7 +242,7 @@ $data = $req->fetch();
                                                 </div>
                                             </div>
                                             <div class="card m-b-0">
-                                                <div class="card-header p-0" id="headingThree">
+                                                <div class="card-header bg-white p-0" id="headingThree">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
                                                             aria-controls="collapseThree">
@@ -588,13 +571,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Contact2</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Contact2</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,101 +590,316 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
+                            <div class="card-body">
+                                <h4 class="card-title">Validation Form</h4>
+                                <form class="needs-validation" novalidate>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationCustom01">First name</label>
+                                            <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationCustom02">Last name</label>
+                                            <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationCustomUsername">Username</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required>
+                                                <div class="invalid-feedback">
+                                                    Please choose a username.
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="validationCustom03">City</label>
+                                            <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid city.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label" for="validationCustom04">State</label>
+                                            <input type="text" class="form-control" id="validationCustom04" placeholder="State" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid state.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label" for="validationCustom05">Zip</label>
+                                            <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid zip.
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <div class="form-check mr-sm-2">
+                                            <input type="checkbox" class="form-check-input" id="invalidCheck" value="check" required>
+                                            <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting.
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary text-white" type="submit">Submit form</button>
+                                </form>
+                                <script>
+                                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                                (function() {
+                                    'use strict';
+                                    window.addEventListener('load', function() {
+                                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                        var forms = document.getElementsByClassName('needs-validation');
+                                        // Loop over them and prevent submission
+                                        var validation = Array.prototype.filter.call(forms, function(form) {
+                                            form.addEventListener('submit', function(event) {
+                                                if (form.checkValidity() === false) {
+                                                    event.preventDefault();
+                                                    event.stopPropagation();
+                                                }
+                                                form.classList.add('was-validated');
+                                            }, false);
+                                        });
+                                    }, false);
+                                })();
+                                </script>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Browser Defaults</h4>
+                                <form>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationDefault01">First name</label>
+                                            <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value="Mark" required>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationDefault02">Last name</label>
+                                            <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
                                         </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationDefaultUsername">Username</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="validationDefault03">City</label>
+                                            <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label" for="validationDefault04">State</label>
+                                            <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label" for="validationDefault05">Zip</label>
+                                            <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                                            <label class="form-check-label" for="invalidCheck2">
+                                                Agree to terms and conditions
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary text-white" type="submit">Submit form</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Server Side</h4>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationServer01">First name</label>
+                                            <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationServer02">Last name</label>
+                                            <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationServerUsername">Username</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                                                </div>
+                                                <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
+                                                <div class="invalid-feedback">
+                                                    Please choose a username.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="validationServer03">City</label>
+                                            <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid city.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label" for="validationServer04">State</label>
+                                            <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid state.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label" for="validationServer05">Zip</label>
+                                            <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid zip.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-check mr-sm-2">
+                                            <input type="checkbox" class="custom-control-input is-invalid" id="invalidCheck3" value="check" required>
+                                            <label class="form-check-label" for="invalidCheck3">Agree to terms and conditions</label>
+                                            <div class="invalid-feedback">
+                                                You must agree before submitting.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary text-white" type="submit">Submit form</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Supported elements</h4>
+                                <form class="was-validated">
+                                    <div class="form-check mb-3">
+                                        <input type="checkbox" class="form-check-input" id="customControlValidation1" required>
+                                        <label class="form-check-label" for="customControlValidation1">Check this custom checkbox</label>
+                                        <div class="invalid-feedback">Example invalid feedback text</div>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="form-check-input" id="customControlValidation2" name="radio-stacked" required>
+                                        <label class="form-check-label" for="customControlValidation2">Toggle this custom radio</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-3">
+                                        <input type="radio" class="form-check-input" id="customControlValidation3" name="radio-stacked" required>
+                                        <label class="form-check-label" for="customControlValidation3">Or toggle this other custom radio</label>
+                                        <div class="invalid-feedback">More example invalid feedback text</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-select" required>
+                                            <option value="">Open this select menu</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                        <div class="invalid-feedback">Example invalid custom select feedback</div>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="form-control" id="validatedCustomFile" required>
+                                        <label class="custom-file-label" for="validatedCustomFile"></label>
+                                        <div class="invalid-feedback">Example invalid custom file feedback</div>
                                     </div>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Tooltips</h4>
+                                <form class="needs-validation" novalidate>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationTooltip01">First name</label>
+                                            <input type="text" class="form-control" id="validationTooltip01" placeholder="First name" value="Mark" required>
+                                            <div class="valid-tooltip">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationTooltip02">Last name</label>
+                                            <input type="text" class="form-control" id="validationTooltip02" placeholder="Last name" value="Otto" required>
+                                            <div class="valid-tooltip">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label" for="validationTooltipUsername">Username</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+                                                <div class="invalid-tooltip">
+                                                    Please choose a unique and valid username.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="validationTooltip03">City</label>
+                                            <input type="text" class="form-control" id="validationTooltip03" placeholder="City" required>
+                                            <div class="invalid-tooltip">
+                                                Please provide a valid city.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label" for="validationTooltip04">State</label>
+                                            <input type="text" class="form-control" id="validationTooltip04" placeholder="State" required>
+                                            <div class="invalid-tooltip">
+                                                Please provide a valid state.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="form-label" for="validationTooltip05">Zip</label>
+                                            <input type="text" class="form-control" id="validationTooltip05" placeholder="Zip" required>
+                                            <div class="invalid-tooltip">
+                                                Please provide a valid zip.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary text-white" type="submit">Submit form</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -722,9 +920,9 @@ $data = $req->fetch();
                                 <li><a href="javascript:void(0)" data-skin="skin-purple" class="purple-theme">5</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-megna" class="megna-theme">6</a></li>
                                 <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme working">7</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme ">7</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-green-dark" class="green-dark-theme">8</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme">9</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme working">9</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-blue-dark" class="blue-dark-theme">10</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme ">12</a></li>
@@ -797,15 +995,30 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
+    <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+    </script>
 </body>
 
 </html>

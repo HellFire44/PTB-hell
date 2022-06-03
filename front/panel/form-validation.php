@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +11,6 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -588,13 +571,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Validation</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Validation</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,101 +590,272 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
+                            <div class="card-body">
+                                <h4 class="card-title">Form Validation</h4>
+                                <h6 class="card-subtitle">Bootstrap Form Validation check the <a href="http://reactiveraven.github.io/jqBootstrapValidation/">official website </a></h6>
+                                <form class="m-t-40" novalidate>
+                                    <div class="form-group">
+                                        <h5>Basic Text Input <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="text" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                        <div class="form-control-feedback"><small>Add <code>required</code> attribute to field for required validation.</small></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Email Field <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="email" name="email" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Password Input Field <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="password" name="password" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Repeat Password Input Field <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="password" name="password2" data-validation-match-match="password" class="form-control" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>File Input Field <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="file" name="file" class="form-control" required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Input with Icon <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Addon To Right" data-validation-required-message="This field is required">
+                                                <span class="input-group-text"><i class="fa fa-dollar"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Maximum Character Length <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="maxChar" class="form-control" required data-validation-required-message="This field is required" maxlength="10">
+                                        </div>
+                                        <div class="form-control-feedback"><small>Add <code>maxlength='10'</code> attribute for maximum number of characters to accept. </small></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Minimum Character Length <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="minChar" class="form-control" required data-validation-required-message="This field is required" minlength="6">
+                                        </div>
+                                        <div class="form-control-feedback"><small>Add <code>minlength="6"</code> attribute for minimum number of characters to accept.</small></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Only Numbers <span class="text-danger">*</span></h5>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                            <input type="number" name="onlyNum" class="form-control" required data-validation-required-message="This field is required">
+                                            <span class="input-group-text">0.00</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Maximum Number <span class="text-danger">*</span></h5>
+                                        <input type="text" name="maxNum" class="form-control" required data-validation-required-message="This field is required" max="25">
+                                        <div class="form-control-feedback"> <small><i>Must be lower than 25</i></small> - <small>Add <code>max</code> attribute for maximum number to accept. Also use <code>data-validation-max-message</code> attribute for max failure message</small> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Minimum Number <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="minNum" class="form-control" required data-validation-required-message="This field is required" min="10">
+                                        </div>
+                                        <div class="form-control-feedback"><small><i>Must be higher than 10</i></small> - <small>Add <code>min</code> attribute for minimum number to accept. Also use <code>data-validation-min-message</code> attribute for min failure message</small></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Text Input Range <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="text" class="form-control" required data-validation-required-message="This field is required" minlength="10" maxlength="20" placeholder="Enter number between 10 &amp; 20"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Input with Button <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search" required> <span class="input-group-btn">
+                                                  <button class="btn btn-info text-white" type="button">Go!</button>
+                                                </span> </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>No Characters, Only Numbers <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="noChar" class="form-control" required data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="No Characters Allowed, Only Numbers"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Pattern <span class="text-danger">*</span> <small><i>Must start with 'a' and end with 'z'</i></small></h5>
+                                        <div class="controls">
+                                            <input type="text" name="pattern" pattern="a.*z" data-validation-pattern-message="Must start with 'a' and end with 'z'" class="form-control" required>
+                                            <div class="form-control-feedback"><small>Add <code>pattern</code> attribute to set input pattern. Also use <code>data-validation-pattern-message</code> attribute for pattern failure message</small></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Enter URL <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" placeholder="Add URL" data-validation-regex-regex="((http[s]?|ftp[s]?):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*" data-validation-regex-message="Only Valid URL's">
+                                            <div class="form-control-feedback"><small>Add <code>data-validation-regex-regex</code> attribute for regular expression. Also use <code>data-validation-regex-message</code> attribute for regex failure message</small></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Enter Email Address <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" placeholder="Email Address" data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="Enter Valid Email"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Enter Date <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" placeholder="MM/DD/YYYY" data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})" data-validation-regex-message="Enter Valid Email"> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Basic Select <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <select name="select" id="select" required class="form-select">
+                                                <option value="">Select Your City</option>
+                                                <option value="1">India</option>
+                                                <option value="2">USA</option>
+                                                <option value="3">UK</option>
+                                                <option value="4">Canada</option>
+                                                <option value="5">Dubai</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5>Textarea <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <textarea name="textarea" id="textarea" class="form-control" required placeholder="Textarea text"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <h5>Checkbox <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" required value="single" class="form-check-input" id="customCheck1">
+                                                        <label class="form-check-label" for="customCheck1">Check this custom checkbox</label>
                                                     </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <h5>Checkbox Group <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <fieldset>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" value="x" name="styled_checkbox" required class="form-check-input" id="customCheck2">
+                                                            <label class="form-check-label" for="customCheck2">I am unchecked</label>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" value="y" name="styled_checkbox" class="form-check-input" id="customCheck3">
+                                                            <label class="form-check-label" for="customCheck3">I am unchecked too</label>
+                                                        </div>
+                                                    </fieldset>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
+                                            <div class="form-group">
+                                                <h5>Select Max 2 Checkbox<span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <fieldset>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" name="styled_max_checkbox" data-validation-maxchecked-maxchecked="2" data-validation-maxchecked-message="Don't be greedy!" required class="form-check-input" id="customCheck4">
+                                                            <label class="form-check-label" for="customCheck4">I am unchecked checkbox</label>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" name="styled_max_checkbox" class="form-check-input" id="customCheck5">
+                                                            <label class="form-check-label" for="customCheck5">I am unchecked too</label>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" name="styled_max_checkbox" class="form-check-input" id="customCheck6">
+                                                            <label class="form-check-label" for="customCheck6">You can check me</label>
+                                                        </div>
+                                                    </fieldset>
+                                                </div> <small>Select any 2 options</small> </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
+                                            <div class="form-group">
+                                                <h5>Minimum 2 Checkbox selection<span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <fieldset>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" value="1" data-validation-minchecked-minchecked="2" data-validation-minchecked-message="Choose at least two" name="styled_min_checkbox" required class="form-check-input" id="customCheck7">
+                                                            <label class="form-check-label" for="customCheck7">I am unchecked checkbox</label>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" value="2" name="styled_min_checkbox" class="form-check-input" id="customCheck8">
+                                                            <label class="form-check-label" for="customCheck8">I am unchecked checkbox too</label>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" value="3" name="styled_min_checkbox" class="form-check-input" id="customCheck9">
+                                                            <label class="form-check-label" for="customCheck9">You can check me</label>
+                                                        </div>
+                                                    </fieldset>
+                                                </div> <small>Select any 2 options</small> </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <h5>Radio Buttons <span class="text-danger">*</span></h5>
+                                                <fieldset class="controls">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" value="1" name="styled_radio" required id="styled_radio1" class="form-check-input">
+                                                        <label class="form-check-label" for="styled_radio1">Check me</label>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" value="2" name="styled_radio" id="styled_radio2" class="form-check-input">
+                                                        <label class="form-check-label" for="styled_radio2">or me</label>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <h5>Inline Radio Buttons <span class="text-danger">*</span></h5>
+                                                <div class="controls">
+                                                    <fieldset>
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" value="Yes" name="styled_inline_radio" required id="styled_radio_inline1" class="form-check-input">
+                                                            <label class="form-check-label" for="styled_radio_inline1">Check me</label>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" value="No" name="styled_inline_radio" id="styled_radio_inline2" class="form-check-input">
+                                                            <label class="form-check-label" for="styled_radio_inline2">or me</label>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs-right">
+                                        <button type="submit" class="btn btn-info text-white">Submit</button>
+                                        <button type="reset" class="btn btn-inverse">Cancel</button>
                                     </div>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -797,15 +951,17 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
+    <script src="dist/js/pages/validation.js"></script>
+    <script>
+    ! function(window, document, $) {
+        "use strict";
+        $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+    }(window, document, jQuery);
+    </script>
 </body>
 
 </html>

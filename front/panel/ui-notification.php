@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +11,12 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
+    <!-- toast CSS -->
+    <link href="assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
+    <!-- page css -->
+    <link href="dist/css/pages/other-pages.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -588,13 +575,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Notification</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Notification</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,101 +594,122 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
-                                        </div>
-                                    </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Simple Toastr Alerts</h4>
+                                <h6 class="card-subtitle">You can use four different alert <code>info, warning, success, and error</code> message.</h6>
+                                <div class="button-box">
+                                    <button class="tst1 btn btn-info text-white">Info Message</button>
+                                    <button class="tst2 btn btn-warning">Warning Message</button>
+                                    <button class="tst3 btn btn-success text-white">Success Message</button>
+                                    <button class="tst4 btn btn-danger text-white">Danger Message</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
+                <!-- row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-12">
+                                        <h4 class="card-title">Alert with different color</h4>
+                                        <h6 class="card-subtitle">use the class <code>alert alert-*colors*</code> for dezier</h6>
+                                        <div class="alert alert-success">This is an example top alert. You can edit what u wish. </div>
+                                        <div class="alert alert-danger">This is an example top alert. You can edit what u wish. </div>
+                                        <div class="alert alert-warning">This is an example top alert. You can edit what u wish. </div>
+                                        <div class="alert alert-info">This is an example top alert. You can edit what u wish. </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-12">
+                                        <h4 class="card-title">Dissmissal Alert</h4>
+                                        <h6 class="card-subtitle">add the button with <code>close</code> class</h6>
+                                        <div class="alert alert-success alert-dismissible"> <i class="ti-user"></i> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> <span aria-hidden="true"></span> </button>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
+                                        <div class="alert alert-danger alert-dismissible"> <i class="ti-user"></i> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                        </div>
+                                        <div class="alert alert-warning alert-dismissible"> <i class="ti-user"></i> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                        </div>
+                                        <div class="alert alert-info alert-dismissible"> <i class="ti-user"></i> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> <span aria-hidden="true"></span> </button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                    <!-- Column -->
+                                    <div class="col-lg-4 col-md-12">
+                                        <h4 class="card-title">Alert with image / icon </h4>
+                                        <h6 class="card-subtitle">add the image / icon before content </h6>
+                                        <div class="alert alert-success alert-dismissible"> <i class="ti-user"></i> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" class="btn-close"aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                        </div>
+                                        <div class="alert alert-danger alert-dismissible"> <img src="assets/images/users/1.jpg" width="30" class="img-circle" alt="img"> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" class="btn-close"aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                        </div>
+                                        <div class="alert alert-warning alert-dismissible"> <img src="assets/images/users/1.jpg" width="30" class="img-circle" alt="img"> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" class="btn-close"aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                        </div>
+                                        <div class="alert alert-info alert-dismissible"> <i class="ti-user"></i> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" class="btn-close"aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- END MODAL -->
+                <!-- row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- Column -->
+                                    <div class="col-lg-6 col-md-12">
+                                        <h4 class="card-title">Alert with rounded corner </h4>
+                                        <h6 class="card-subtitle">add the <code>alert-rounded</code> class to the alert </h6>
+                                        <div class="alert alert-success alert-rounded alert-dismissible"> <i class="ti-user"></i> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" class="btn-close"aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                        </div>
+                                        <div class="alert alert-danger alert-rounded alert-dismissible"> <img src="assets/images/users/1.jpg" width="30" class="img-circle" alt="img"> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" class="btn-close"aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                        </div>
+                                        <div class="alert alert-warning alert-rounded alert-dismissible"> <img src="assets/images/users/1.jpg" width="30" class="img-circle" alt="img"> This is an example top alert. You can edit what u wish.
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" class="btn-close"aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                        </div>
+                                        <div class="alert alert-info alert-rounded alert-dismissible">This is an example top alert. You can edit what u wish.
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                    <!-- Column -->
+                                    <div class="col-lg-6 col-md-12">
+                                        <h4 class="card-title">Alert with content </h4>
+                                        <h6 class="card-subtitle">Alerts can also contain additional HTML elements </h6>
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" class="btn-close"aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                            <h3 class="text-success"><i class="fa fa-check-circle"></i> Success</h3> This is an example top alert. You can edit what u wish. Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.
+                                        </div>
+                                        <div class="alert alert-info alert-dismissible">
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" class="btn-close"aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                            <h3 class="text-info"><i class="fa fa-exclamation-circle"></i> Information</h3> This is an example top alert. You can edit what u wish. Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.
+                                        </div>
+                                        <div class="alert alert-warning alert-dismissible">
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" class="btn-close"aria-label="Close"> <span aria-hidden="true"></span> </button>
+                                            <h3 class="text-warning"><i class="fa fa-exclamation-triangle"></i> Warning</h3> This is an example top alert. You can edit what u wish. Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.
+                                        </div>
+                                    </div>
+                                    <!-- Column -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -797,15 +805,13 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
+    <script src="assets/node_modules/toast-master/js/jquery.toast.js"></script>
+    <script src="dist/js/pages/toastr.js"></script>
+    <!-- Custom Theme JavaScript -->
 </body>
 
 </html>

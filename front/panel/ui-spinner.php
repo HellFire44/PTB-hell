@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +11,6 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -229,7 +212,7 @@ $data = $req->fetch();
                                          <!-- Accordian -->
                                         <div class="accordion" id="accordionExample">
                                             <div class="card m-b-0">
-                                                <div class="card-header p-0" id="headingOne">
+                                                <div class="card-header bg-white p-0" id="headingOne">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                             Collapsible Group Item #1
@@ -244,7 +227,7 @@ $data = $req->fetch();
                                                 </div>
                                             </div>
                                             <div class="card m-b-0">
-                                                <div class="card-header p-0" id="headingTwo">
+                                                <div class="card-header bg-white p-0" id="headingTwo">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
                                                             aria-controls="collapseTwo">
@@ -259,7 +242,7 @@ $data = $req->fetch();
                                                 </div>
                                             </div>
                                             <div class="card m-b-0">
-                                                <div class="card-header p-0" id="headingThree">
+                                                <div class="card-header bg-white p-0" id="headingThree">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
                                                             aria-controls="collapseThree">
@@ -588,13 +571,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Spinner</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Spinner</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -609,99 +592,171 @@ $data = $req->fetch();
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="">
+                            <div class="card-body">
+                                <h4 class="card-title">Border Spinner</h4>
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <h4 class="card-title mt-4">Spinner Colors</h4>
+                                <div class="spinner-border text-primary" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-border text-secondary" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-border text-success" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-border text-danger" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-border text-warning" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-border text-info" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-border text-light" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-border text-dark" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
-                                                </div>
-                                            </div>
+                                    <div class="col-md-6">
+                                        <h4 class="card-title">Placement Flex</h4>
+                                        <div class="d-flex justify-content-center">
+                                          <div class="spinner-border" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                          </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
+                                    <div class="col-md-6">
+                                        <h4 class="card-title">Loading with Text</h4>
+                                        <div class="d-flex align-items-center">
+                                          <strong>Loading...</strong>
+                                          <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 class="card-title mt-4">Float</h4>
+                                        <div class="clearfix">
+                                          <div class="spinner-border float-end" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 class="card-title mt-4">Text Align</h4>
+                                        <div class="text-center">
+                                          <div class="spinner-border" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 class="card-title mt-4">Size</h4>
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                          <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <div class="spinner-grow spinner-grow-sm" role="status">
+                                          <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 class="card-title mt-4">Custom Style</h4>
+                                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                                          <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                                          <span class="sr-only">Loading...</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="card-title">Spinner with Buttons</h5>
+                                        <button class="btn btn-primary text-white" type="button" disabled>
+                                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                          <span class="sr-only">Loading...</span>
+                                        </button>
+                                        <button class="btn btn-primary text-white" type="button" disabled>
+                                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                          Loading...
+                                        </button>
                                     </div>
-                                </form>
+                                    <div class="col-md-6">
+                                        <h5 class="card-title">Growing Spinner with Buttons</h5>
+                                        <button class="btn btn-primary text-white" type="button" disabled>
+                                          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                          <span class="sr-only">Loading...</span>
+                                        </button>
+                                        <button class="btn btn-primary text-white" type="button" disabled>
+                                          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                          Loading...
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Growing spinner</h4>
+                                <div class="spinner-grow" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-primary" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-secondary" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-success" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-danger" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-warning" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-info" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-light" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                                <div class="spinner-grow text-dark" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Alignment</h4>
+                                <div class="spinner-border m-3" role="status">
+                                  <span class="sr-only">Loading...</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -722,9 +777,9 @@ $data = $req->fetch();
                                 <li><a href="javascript:void(0)" data-skin="skin-purple" class="purple-theme">5</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-megna" class="megna-theme">6</a></li>
                                 <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme working">7</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme ">7</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-green-dark" class="green-dark-theme">8</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme">9</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme working">9</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-blue-dark" class="blue-dark-theme">10</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme ">12</a></li>
@@ -797,15 +852,10 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
 </body>
 
 </html>

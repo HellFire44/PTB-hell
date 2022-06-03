@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +11,6 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -229,7 +212,7 @@ $data = $req->fetch();
                                          <!-- Accordian -->
                                         <div class="accordion" id="accordionExample">
                                             <div class="card m-b-0">
-                                                <div class="card-header p-0" id="headingOne">
+                                                <div class="card-header bg-white p-0" id="headingOne">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                             Collapsible Group Item #1
@@ -244,7 +227,7 @@ $data = $req->fetch();
                                                 </div>
                                             </div>
                                             <div class="card m-b-0">
-                                                <div class="card-header p-0" id="headingTwo">
+                                                <div class="card-header bg-white p-0" id="headingTwo">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
                                                             aria-controls="collapseTwo">
@@ -259,7 +242,7 @@ $data = $req->fetch();
                                                 </div>
                                             </div>
                                             <div class="card m-b-0">
-                                                <div class="card-header p-0" id="headingThree">
+                                                <div class="card-header bg-white p-0" id="headingThree">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
                                                             aria-controls="collapseThree">
@@ -588,13 +571,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Toasts</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Toasts</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,101 +590,218 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="card">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Basic Toast</h4>
+                                <div class="bg-light p-3">
+                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-header">
+                                        <i data-feather="bar-chart-2" class="fill-white text-info feather-sm me-2"></i>
+                                        <strong class="me-auto">Bootstrap</strong>
+                                        <small>11 mins ago</small>
+                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                      </div>
+                                      <div class="toast-body">
+                                        Hello, world! This is a toast message.
+                                      </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Translucent</h4>
+                                <div class="bg-light p-3">
+                                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-header">
+                                        <i data-feather="bar-chart-2" class="fill-white text-info feather-sm me-2"></i>
+                                        <strong class="me-auto">Bootstrap</strong>
+                                        <small class="text-muted">11 mins ago</small>
+                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                      </div>
+                                      <div class="toast-body">
+                                        Hello, world! This is a toast message.
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Stacking</h4>
+                                <div class="bg-light p-3">
+                                    <div class="toast-container">
+                                      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                        <div class="toast-header">
+                                          <i data-feather="bar-chart-2" class="fill-white text-info feather-sm me-2"></i>
+                                          <strong class="me-auto">Bootstrap</strong>
+                                          <small class="text-muted">just now</small>
+                                          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                         </div>
+                                        <div class="toast-body">
+                                          See? Just like this.
+                                        </div>
+                                      </div>
+
+                                      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                        <div class="toast-header">
+                                          <i data-feather="bar-chart-2" class="fill-white text-info feather-sm me-2"></i>
+                                          <strong class="me-auto">Bootstrap</strong>
+                                          <small class="text-muted">2 seconds ago</small>
+                                          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                        </div>
+                                        <div class="toast-body">
+                                          Heads up, toasts will stack automatically
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Custom content</h4>
+                                <div class="bg-light p-3">
+                                    <div class="toast-container">
+                                        <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+                                            <div class="d-flex">
+                                              <div class="toast-body">
+                                              Hello, world! This is a toast message.
+                                             </div>
+                                              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                            </div>
+                                          </div>
+
+                                          <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                            <div class="toast-body">
+                                              Hello, world! This is a toast message.
+                                              <div class="mt-2 pt-2 border-top">
+                                                <button type="button" class="btn btn-primary btn-sm">Take action</button>
+                                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Solid Color schemes</h4>
+                                <div class="bg-light p-3">
+                                    <div class="toast mb-2 d-flex align-items-center text-white bg-info border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-body">
+                                        <div class="d-flex align-items-center">
+                                            <i data-feather="info" class="fill-white feather-sm me-2"></i> Hello, world! This is a toast message.
+                                        </div>
+                                      </div>
+                                      <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                                    </div>
+                                    <div class="toast mb-2 d-flex align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-body">
+                                        <div class="d-flex align-items-center">
+                                            <i data-feather="info" class="fill-white feather-sm me-2"></i> Hello, world! This is a toast message.
+                                        </div>
+                                      </div>
+                                      <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                                    </div>
+                                    <div class="toast mb-2 d-flex align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-body">
+                                        <div class="d-flex align-items-center">
+                                            <i data-feather="info" class="fill-white feather-sm me-2"></i> Hello, world! This is a toast message.
+                                        </div>
+                                      </div>
+                                      <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                                    </div>
+                                    <div class="toast mb-2 d-flex align-items-center text-white bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-body">
+                                        <div class="d-flex align-items-center">
+                                            <i data-feather="info" class="fill-white feather-sm me-2"></i> Hello, world! This is a toast message.
+                                        </div>
+                                      </div>
+                                      <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                                    </div>
+                                    <div class="toast mb-2 d-flex align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-body">
+                                        <div class="d-flex align-items-center">
+                                            <i data-feather="info" class="fill-white feather-sm me-2"></i> Hello, world! This is a toast message.
+                                        </div>
+                                      </div>
+                                      <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Light Color schemes</h4>
+                                <div class="bg-light p-3">
+                                    <div class="toast mb-2 d-flex align-items-center text-white bg-light-info border-0 remove-close-icon" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-body">
+                                        <div class="d-flex align-items-center text-info font-medium">
+                                            <i data-feather="info" class="fill-white feather-sm me-2"></i> Hello, world! This is a toast message.
+                                        </div>
+                                      </div>
+                                      <button type="button" class="btn-close ms-auto me-2 d-flex align-items-center" data-bs-dismiss="toast" aria-label="Close">
+                                          <i data-feather="x" class="feather-sm fill-white text-info"></i>
+                                      </button>
+                                    </div>
+                                    <div class="toast mb-2 d-flex align-items-center text-white bg-light-primary border-0 remove-close-icon" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-body">
+                                        <div class="d-flex align-items-center text-primary font-medium">
+                                            <i data-feather="info" class="fill-white feather-sm me-2"></i> Hello, world! This is a toast message.
+                                        </div>
+                                      </div>
+                                      <button type="button" class="btn-close ms-auto me-2 d-flex align-items-center" data-bs-dismiss="toast" aria-label="Close">
+                                          <i data-feather="x" class="feather-sm fill-white text-primary"></i>
+                                      </button>
+                                    </div>
+                                    <div class="toast mb-2 d-flex align-items-center text-white bg-light-danger border-0 remove-close-icon" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-body">
+                                        <div class="d-flex align-items-center text-danger font-medium">
+                                            <i data-feather="info" class="fill-white feather-sm me-2"></i> Hello, world! This is a toast message.
+                                        </div>
+                                      </div>
+                                      <button type="button" class="btn-close ms-auto me-2 d-flex align-items-center" data-bs-dismiss="toast" aria-label="Close">
+                                          <i data-feather="x" class="feather-sm fill-white text-danger"></i>
+                                      </button>
+                                    </div>
+                                    <div class="toast mb-2 d-flex align-items-center text-white bg-light-warning border-0 remove-close-icon" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-body">
+                                        <div class="d-flex align-items-center text-warning font-medium">
+                                            <i data-feather="info" class="fill-white feather-sm me-2"></i> Hello, world! This is a toast message.
+                                        </div>
+                                      </div>
+                                      <button type="button" class="btn-close ms-auto me-2 d-flex align-items-center" data-bs-dismiss="toast" aria-label="Close">
+                                          <i data-feather="x" class="feather-sm fill-white text-warning"></i>
+                                      </button>
+                                    </div>
+                                    <div class="toast mb-2 d-flex align-items-center text-white bg-light-success border-0 remove-close-icon" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-body">
+                                        <div class="d-flex align-items-center text-success font-medium">
+                                            <i data-feather="info" class="fill-white feather-sm me-2"></i> Hello, world! This is a toast message.
+                                        </div>
+                                      </div>
+                                      <button type="button" class="btn-close ms-auto me-2 d-flex align-items-center" data-bs-dismiss="toast" aria-label="Close">
+                                          <i data-feather="x" class="feather-sm fill-white text-success"></i>
+                                      </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -722,9 +822,9 @@ $data = $req->fetch();
                                 <li><a href="javascript:void(0)" data-skin="skin-purple" class="purple-theme">5</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-megna" class="megna-theme">6</a></li>
                                 <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme working">7</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme ">7</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-green-dark" class="green-dark-theme">8</a></li>
-                                <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme">9</a></li>
+                                <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme working">9</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-blue-dark" class="blue-dark-theme">10</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
                                 <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme ">12</a></li>
@@ -797,15 +897,13 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
+    <script type="text/javascript">
+        $('.toast').toast('show');
+    </script>
 </body>
 
 </html>

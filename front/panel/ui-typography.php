@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +11,10 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
+    <!-- page css -->
+    <link href="dist/css/pages/ui-bootstrap-page.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -588,13 +573,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Typography</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Typography</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,101 +592,187 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="">
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="col-lg-6">
+                                        <h4 class="card-title">Typography</h4>
+                                        <h6 class="card-subtitle">Use tags <code>h1 to h6</code> for get desire heading.</h6>
+                                        <h1>h1. Bootstrap heading</h1>
+                                        <h2>h2. Bootstrap heading</h2>
+                                        <h3>h3. Bootstrap heading</h3>
+                                        <h4>h4. Bootstrap heading</h4>
+                                        <h5>h5. Bootstrap heading</h5>
+                                        <h6>h6. Bootstrap heading</h6>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
-                                        </div>
+                                    <div class="col-lg-6">
+                                        <h4 class="card-title">Heading with subtitle</h4>
+                                        <h6 class="card-subtitle">Use tags <code>h1 to h6</code> for get desire heading.</h6>
+                                        <h1>Heading 1 <small>Sub-heading</small></h1>
+                                        <h2>Heading 2 <small>Sub-heading</small></h2>
+                                        <h3>Heading 3 <small>Sub-heading</small></h3>
+                                        <h4>Heading 4 <small>Sub-heading</small></h4>
+                                        <h5>Heading 5 <small>Sub-heading</small></h5>
+                                        <h6>Heading 6 <small>Sub-heading</small></h6>
+                                    </div>
+                                    <div class="col-12">
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <br>
+                                        <br>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <h4 class="card-title">Paragraph with justify</h4>
+                                        <h6 class="card-subtitle">Use tags <code>text-justify</code> for get desire paragraph.</h6>
+                                        <p class="text-justify">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex communi. At nos hinc posthac, sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem certam indicere. Cras mattis iudicium purus sit amet fermentum.</p>
+                                    </div>
+                                    <div class="col-lg-6 offset-lg-1">
+                                        <h4 class="card-title">Alignment text</h4>
+                                        <h6 class="card-subtitle">Use tags <code>text-start, text-center, text-end</code> for get desire text.</h6>
+                                        <p class="text-start">Left aligned text on all viewport sizes.</p>
+                                        <p class="text-center">Center aligned text on all viewport sizes.</p>
+                                        <p class="text-end">Right aligned text on all viewport sizes.</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <br>
+                                        <br>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h4 class="card-title">View port text</h4>
+                                        <h6 class="card-subtitle">Use tags <code>text-sm-left, text-md-left, text-lg-left, text-xl-left </code> for get desire text.</h6>
+                                        <p class="text-sm-left">Left aligned text on viewports sized SM (small) or wider.</p>
+                                        <p class="text-md-left">Left aligned text on viewports sized MD (medium) or wider.</p>
+                                        <p class="text-lg-left">Left aligned text on viewports sized LG (large) or wider.</p>
+                                        <p class="text-xl-left">Left aligned text on viewports sized XL (extra-large) or wider.</p>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h4 class="card-title">Font weight and italics</h4>
+                                        <h6 class="card-subtitle">Use tags <code>font-weight-bold, font-weight-normal, font-weight-italic</code> for get desire text.</h6>
+                                        <p class="font-weight-bold">Bold text.</p>
+                                        <p class="font-weight-normal">Normal weight text.</p>
+                                        <p class="font-italic">Italic text.</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <br>
+                                        <br>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4 class="card-title">Text colors</h4>
+                                        <h6 class="card-subtitle">Use tags below class for get desire text.</h6>
+                                        <p class="text-muted">This is an example of muted text. Add class <code>text-muted</code></p>
+                                        <p class="text-primary">This is an example of primary text. Add class <code>text-primary</code></p>
+                                        <p class="text-success">This is an example of success text. Add class <code>text-success</code></p>
+                                        <p class="text-info">This is an example of info text. Add class <code>text-info</code></p>
+                                        <p class="text-warning">This is an example of warning text. Add class <code>text-warning</code></p>
+                                        <p class="text-danger">This is an example of danger text. Add class <code>text-danger</code></p>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4 class="card-title">Address</h4>
+                                        <h6 class="card-subtitle">Use <code>address</code> for get desire address.</h6>
+                                        <address>
+                                            <strong>Twitter, Inc.</strong>
+                                            <br> 795 Folsom Ave, Suite 600
+                                            <br> San Francisco, CA 94107
+                                            <br>
+                                            <abbr title="Phone">P:</abbr>(123) 456-7890
+                                        </address>
+                                        <address>
+                                            <strong>George Belly</strong>
+                                            <br>
+                                            <a href="mailto:#">first.last@example.com</a>
+                                        </address>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4 class="card-title">Blockquotes</h4>
+                                        <h6 class="card-subtitle">Use <code>blockquote</code> for get desire address.</h6>
+                                        <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</blockquote>
+                                        <blockquote>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                            <small>- Someone famous in <cite title="Source Title">Source Title</cite></small>
+                                        </blockquote>
+                                    </div>
+                                    <div class="col-12">
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <br>
+                                        <br>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4 class="card-title">Ol Listing</h4>
+                                        <h6 class="card-subtitle">Use tags <code>ol > li</code>for get desire ol list.</h6>
+                                        <ol>
+                                            <li>Lorem ipsum dolor sit amet</li>
+                                            <li>Consectetur adipiscing elit</li>
+                                            <li>Integer molestie lorem at massa </li>
+                                        </ol>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4 class="card-title">Ul Listing</h4>
+                                        <h6 class="card-subtitle">Use tags <code>ul > li</code>for get desire ol list.</h6>
+                                        <ul>
+                                            <li>Lorem ipsum dolor sit amet</li>
+                                            <li>Consectetur adipiscing elit</li>
+                                            <li>Integer molestie lorem at massa </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4 class="card-title">Description Text</h4>
+                                        <h6 class="card-subtitle">Use tags <code>dl > dt</code>for get desire ol list.</h6>
+                                        <dl>
+                                            <dt>Standard Description List</dt>
+                                            <dd>Description Text</dd>
+                                            <dt>Description List Title</dt>
+                                            <dd>Description List Text</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-12">
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <br>
+                                        <br>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4 class="card-title">Fancy Listing 1</h4>
+                                        <h6 class="card-subtitle">Use class <code>list-icons</code>to ul for get desire ol list.</h6>
+                                        <ul class="list-icons">
+                                            <li><i class="ti-angle-right"></i> Lorem ipsum dolor sit amet</li>
+                                            <li><i class="ti-angle-right"></i> Consectetur adipiscing elit</li>
+                                            <li><i class="ti-angle-right"></i> Integer molestie lorem at massa </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4 class="card-title">Fancy Listing with href</h4>
+                                        <h6 class="card-subtitle">Use class <code>list-icons</code>to ul for get desire ol list.</h6>
+                                        <ul class="list-icons">
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-info"></i> Lorem ipsum dolor sit amet</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-info"></i> Consectetur adipiscing elit</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-info"></i> Integer molestie lorem at massa </a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4 class="card-title">Fancy Listing with href</h4>
+                                        <h6 class="card-subtitle">Use class <code>list-icons</code>to ul for get desire ol list.</h6>
+                                        <ul class="list-icons">
+                                            <li><a href="javascript:void(0)"><i class="fa fa-chevron-right"></i> Lorem ipsum dolor sit amet</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-chevron-right"></i> Consectetur adipiscing elit</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-chevron-right"></i> Integer molestie lorem at massa </a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -797,15 +868,10 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
 </body>
 
 </html>

@@ -1,18 +1,3 @@
-<?php
-session_start();
-require_once '../config.php'; // ajout connexion bdd 
-// si la session existe pas soit si l'on est pas connecté on redirige
-if (!isset($_SESSION['user'])) {
-    header('Location:index.php');
-    die();
-}
-
-// On récupere les données de l'utilisateur
-$req = $bdd->prepare('SELECT * FROM utilisateurs WHERE token = ?');
-$req->execute(array($_SESSION['user']));
-$data = $req->fetch();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,10 +11,10 @@ $data = $req->fetch();
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
-    <!-- Calendar CSS -->
-    <link href="assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
+    <!-- page css -->
+    <link href="dist/css/pages/pricing-page.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -588,13 +573,13 @@ $data = $req->fetch();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Calendar</h4>
+                        <h4 class="text-themecolor">Pricing</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-end">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb justify-content-end">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Calendar</li>
+                                <li class="breadcrumb-item active">Pricing</li>
                             </ol>
                             <button type="button" class="btn btn-info d-none d-lg-block m-l-15 text-white"><i class="fa fa-plus-circle"></i> Create New</button>
                         </div>
@@ -607,40 +592,89 @@ $data = $req->fetch();
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="card-body">
-                                            <h4 class="card-title m-t-10">Drag & Drop Event</h4>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events" data-class="bg-info">
-                                                            <i class="fa fa-circle text-info"></i>Événement Principale </div>
-                                                        <div class="calendar-events" data-class="bg-success">
-                                                            <i class="fa fa-circle text-success"></i> Événement Secondaire</div>
-                                                        <div class="calendar-events" data-class="bg-danger">
-                                                            <i class="fa fa-circle text-danger"></i> Événement Important</div>
-                                                        <div class="calendar-events" data-class="bg-warning">
-                                                            <i class="fa fa-circle text-warning"></i> Événement Personelle</div>
+                            <div class="card-body">
+                                <div class="row pricing-plan">
+                                    <div class="col-md-3 col-xs-12 col-sm-6 no-padding">
+                                        <div class="pricing-box">
+                                            <div class="pricing-body b-l">
+                                                <div class="pricing-header">
+                                                    <h4 class="text-center">Silver</h4>
+                                                    <h2 class="text-center"><span class="price-sign">$</span>24</h2>
+                                                    <p class="uppercase">per month</p>
+                                                </div>
+                                                <div class="price-table-content">
+                                                    <div class="price-row"><i class="icon-user"></i> 3 Members</div>
+                                                    <div class="price-row"><i class="icon-screen-smartphone"></i> Single Device</div>
+                                                    <div class="price-row"><i class="icon-drawar"></i> 50GB Storage</div>
+                                                    <div class="price-row"><i class="icon-refresh"></i> Monthly Backups</div>
+                                                    <div class="price-row">
+                                                        <button class="btn btn-success waves-effect waves-light m-t-20 text-white">Sign up</button>
                                                     </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check m-l-10 m-t-10">
-                                                        <input type="checkbox" class="form-check-input" id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Supprimer après la fin</label>
-                                                    </div>
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#add-new-event" class="btn m-t-10 btn-info w-100 waves-effect waves-light text-white">
-                                                        <i class="ti-plus"></i> Ajouter un nouvelle événement
-                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
+                                    <div class="col-md-3 col-xs-12 col-sm-6 no-padding">
+                                        <div class="pricing-box b-l">
+                                            <div class="pricing-body">
+                                                <div class="pricing-header">
+                                                    <h4 class="text-center">Gold</h4>
+                                                    <h2 class="text-center"><span class="price-sign">$</span>34</h2>
+                                                    <p class="uppercase">per month</p>
+                                                </div>
+                                                <div class="price-table-content">
+                                                    <div class="price-row"><i class="icon-user"></i> 5 Members</div>
+                                                    <div class="price-row"><i class="icon-screen-smartphone"></i> Single Device</div>
+                                                    <div class="price-row"><i class="icon-drawar"></i> 80GB Storage</div>
+                                                    <div class="price-row"><i class="icon-refresh"></i> Monthly Backups</div>
+                                                    <div class="price-row">
+                                                        <button class="btn btn-success waves-effect waves-light m-t-20 text-white">Sign up</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-xs-12 col-sm-6 no-padding">
+                                        <div class="pricing-box featured-plan">
+                                            <div class="pricing-body">
+                                                <div class="pricing-header">
+                                                    <h4 class="price-lable text-white bg-warning"> Popular</h4>
+                                                    <h4 class="text-center">Platinum</h4>
+                                                    <h2 class="text-center"><span class="price-sign">$</span>45</h2>
+                                                    <p class="uppercase">per month</p>
+                                                </div>
+                                                <div class="price-table-content">
+                                                    <div class="price-row"><i class="icon-user"></i> 10 Members</div>
+                                                    <div class="price-row"><i class="icon-screen-smartphone"></i> Single Device</div>
+                                                    <div class="price-row"><i class="icon-drawar"></i> 120GB Storage</div>
+                                                    <div class="price-row"><i class="icon-refresh"></i> Monthly Backups</div>
+                                                    <div class="price-row">
+                                                        <button class="btn btn-lg btn-info waves-effect waves-light m-t-20 text-white">Sign up</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-xs-12 col-sm-6 no-padding">
+                                        <div class="pricing-box">
+                                            <div class="pricing-body b-r">
+                                                <div class="pricing-header">
+                                                    <h4 class="text-center">Dimond</h4>
+                                                    <h2 class="text-center"><span class="price-sign">$</span>54</h2>
+                                                    <p class="uppercase">per month</p>
+                                                </div>
+                                                <div class="price-table-content">
+                                                    <div class="price-row"><i class="icon-user"></i> 15 Members</div>
+                                                    <div class="price-row"><i class="icon-screen-smartphone"></i> Single Device</div>
+                                                    <div class="price-row"><i class="icon-drawar"></i> 1TB Storage</div>
+                                                    <div class="price-row"><i class="icon-refresh"></i> Monthly Backups</div>
+                                                    <div class="price-row">
+                                                        <button class="btn btn-success waves-effect waves-light m-t-20 text-white">Sign up</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -648,60 +682,6 @@ $data = $req->fetch();
                         </div>
                     </div>
                 </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter un nouvelle événement</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Créer un évènement                                </button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-bs-dismiss="modal">Effacer</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Add Category -->
-                <div class="modal fade none-border" id="add-new-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Ajouter</strong> une catégorie</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form role="form">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Nom de catégorie</label>
-                                            <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Choisissez la couleur de la catégorie</label>
-                                            <select class="form-control form-select form-white" data-placeholder="Choose a color..." name="category-color">
-                                                <option value="success">Principale</option>
-                                                <option value="danger">Secondaire</option>
-                                                <option value="info">Important</option>
-                                                <option value="primary">Primary</option>
-                                                <option value="warning">Warning</option>
-                                                <option value="inverse">Inverse</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-bs-dismiss="modal">Save</button>
-                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MODAL -->
                 <!-- ============================================================== -->
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
@@ -797,15 +777,10 @@ $data = $req->fetch();
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="./assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="./assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!-- Calendar JavaScript -->
-    <script src="./assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="./assets/node_modules/moment/moment.js"></script>
-    <script src='./assets/node_modules/calendar/dist/fullcalendar.min.js'></script>
-    <script src="./assets/node_modules/calendar/dist/cal-init.js"></script>
 </body>
 
 </html>
