@@ -43,6 +43,44 @@
 @import url(css/owl.carousel.css);
 @import url(css/font-awesome.min.css);
 
+
+
+
+/*------------------------------------------------------------------
+    CSS Add By HellFire44
+-------------------------------------------------------------------*/
+
+
+.btnpadmin {
+    height: 46px;
+    width: 280px;
+    position: absolute;
+    left: 609px;
+    top: 7px;
+    
+}
+
+.bsncompte {
+    border: 50px;
+    height: 46px;
+    width: 280px;
+    position: absolute;
+    left: -318px;
+    top: 38px;
+}
+
+.infocompte {
+    height: 46px;
+    width: 280px;
+    position: absolute;
+    left: -318px;
+    top: 38px;
+}
+
+
+
+
+
 /*------------------------------------------------------------------
     SKELETON
 -------------------------------------------------------------------*/
@@ -1697,6 +1735,7 @@ hr.invis1 {
 .bootstrap-select.form-control.input-group-btn {
     z-index: auto;
 }
+
 
 .bootstrap-select.btn-group:not(.input-group-btn),
 .bootstrap-select.btn-group[class*="col-"] {
